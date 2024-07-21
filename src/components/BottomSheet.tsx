@@ -21,7 +21,7 @@ interface BottomSheetProps {
 }
 
 const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, formData, setFormData }: BottomSheetProps) => {
-  const handleTextareaChange = (event) => {
+  const handleTextareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,

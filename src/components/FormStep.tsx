@@ -3,7 +3,7 @@ interface FormStepProps {
   options: string[];
   name: string;
   value: string | null;
-  onChange: (event) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const FormStep = ({ question, options, name, value, onChange }: FormStepProps) => {

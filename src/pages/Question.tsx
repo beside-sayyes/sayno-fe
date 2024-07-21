@@ -12,6 +12,10 @@ interface FormData {
   requestDetails: string | null;
 }
 
+interface SubCategoryOptions {
+  [key: string]: string[];
+}
+
 const Question = () => {
   const [step, setStep] = useState(1);
   const [isDepthQuestionShow, setIsDepthQuestionShow] = useState(false);
@@ -24,7 +28,7 @@ const Question = () => {
 
   const totalStep = 3;
   const categoryOptions = ['돈', '약속', '학교', '회사', '결혼', '기타'];
-  const subCategoryOptions = {
+  const subCategoryOptions: SubCategoryOptions = {
     돈: [],
     약속: [],
     학교: ['과제'],
@@ -38,6 +42,7 @@ const Question = () => {
   const handleStepOneNext = () => {
     if (formData.category === null) {
       alert('상황을 입력해주세요');
+      return;
     }
 
     if (subCategoryOptions[formData.category]?.length === 0) {
@@ -123,7 +128,7 @@ const Question = () => {
       {step === 1 && isDepthQuestionShow && formData.category ? (
         <FormStep
           question={`'${formData.category}'를 선택하셨네요! 어떤 상황이셨어요?`}
-          options={subCategoryOptions[formData.category]}
+          options={subCategoryOptions[formData.category] || []}
           name='subCategory'
           value={formData.subCategory}
           onChange={handleChange}
