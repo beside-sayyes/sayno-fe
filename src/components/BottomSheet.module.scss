@@ -1,4 +1,4 @@
-.all-wrapper {
+.allWrapper {
   z-index: 20;
   position: absolute;
   left: 0;
@@ -19,7 +19,7 @@
   }
 }
 
-.dim-overlay {
+.dimOverlay {
   position: absolute;
   left: 0;
   top: 0;
@@ -28,13 +28,13 @@
   background-color: rgba(#000, 0.6);
 }
 
-.content-wrapper {
+.contentWrapper {
   position: relative;
   z-index: 1;
   background-color: #fff;
   height: auto;
   max-height: 67vh;
-  min-height: 55vh;
+  min-height: 40vh;
   width: 100%;
   bottom: -100%;
   display: flex;

@@ -2,7 +2,7 @@ interface FormStepProps {
   question: string;
   options: string[];
   name: string;
-  value: string;
+  value: string | null;
   onChange: (event) => void;
 }
 

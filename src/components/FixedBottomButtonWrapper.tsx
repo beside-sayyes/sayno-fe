@@ -3,12 +3,13 @@ import styles from './FixedBottomButtonWrapper.module.scss';
 
 interface FixedBottomButtonWrapperProps {
   onClick: () => void;
+  buttonText: string;
 }
 
-const FixedBottomButtonWrapper = ({ onClick }: FixedBottomButtonWrapperProps) => {
+const FixedBottomButtonWrapper = ({ onClick, buttonText }: FixedBottomButtonWrapperProps) => {
   return (
     <div className={styles.wrapper}>
-      <PrimaryButton buttonText={'다음'} onClick={onClick} />
+      <PrimaryButton buttonText={buttonText} onClick={onClick} />
     </div>
   );
 };
