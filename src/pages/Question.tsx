@@ -6,7 +6,7 @@ import FormStep from '../components/FormStep.tsx';
 import FixedBottomButtonWrapper from '../components/FixedBottomButtonWrapper.tsx';
 import BottomSheet from '../components/BottomSheet.tsx';
 
-const RequestQuestion = () => {
+const Question = () => {
   const [step, setStep] = useState(1);
   const [isSituationSelected, setIsSituationSelected] = useState(false);
   const [isBottomSheet, setIsBottomSheet] = useState(false);
@@ -96,4 +96,4 @@ const RequestQuestion = () => {
   );
 };
 
-export default RequestQuestion;
+export default Question;

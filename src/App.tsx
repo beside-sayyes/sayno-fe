@@ -1,8 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './components/Layout.tsx';
 import Home from './pages/Home.tsx';
-import RequestQuestion from './pages/RequestQuestion.tsx';
-import RejectQuestion from './pages/RejectQuestion.tsx';
+import Question from './pages/Question.tsx';
 
 const router = createBrowserRouter([
   {
@@ -14,12 +13,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/request-question',
-        element: <RequestQuestion />,
-      },
-      {
-        path: '/reject-question',
-        element: <RejectQuestion />,
+        path: '/question',
+        element: <Question />,
       },
     ],
   },
