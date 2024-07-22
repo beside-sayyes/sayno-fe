@@ -49,7 +49,7 @@ const Question = () => {
     결혼: ['청첩장 모임', '결혼식 참여', '축가 및 축사', '결혼기념일'],
     기타: [],
   };
-  const genderOptions = ['남', '여'];
+  const genderOptions = ['남자', '여자'];
   const ageOptions = ['10대', '20대', '30대', '40대', '50대'];
   const reasonOptions = [
     {
@@ -254,6 +254,7 @@ const Question = () => {
           name='category'
           value={formData.category}
           onChange={handleChange}
+          iconStyle={true}
         />
       ) : null}
       {step === 1 && isDepthQuestionShow && formData.category ? (
@@ -263,11 +264,13 @@ const Question = () => {
           name='subCategory'
           value={formData.subCategory}
           onChange={handleChange}
+          iconStyle={true}
         />
       ) : null}
       {step === 1 ? (
         <BottomSheet
           bottomSheetTitle={'어떤 요청을 받으셨어요?'}
+          bottomSheetDesciption={'구체적으로 말씀해 주세요'}
           isShow={isBottomSheetShow}
           onClose={onClose}
           onClick={goStepTwo}

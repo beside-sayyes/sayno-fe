@@ -1,9 +1,15 @@
+import styles from './Footer.module.scss';
+
 const Footer = () => {
   return (
-    <div>
-      <img src='images/logo_sayno.png' alt='sayno logo' />
-      <a href='mailto:sayno.cs@gmail.com'>sayno.cs@gmail.com</a>
-      <p>©SAYNO. All rights reserved.</p>
+    <div className={styles.footer}>
+      <div className={styles.imgWrapper}>
+        <img className={styles.img} src='images/logo_sayno_gray.png' alt='sayno logo' />
+      </div>
+      <a className={styles.text} href='mailto:sayno.cs@gmail.com'>
+        sayno.cs@gmail.com
+      </a>
+      <p className={styles.text}>©SAYNO. All rights reserved.</p>
     </div>
   );
 };

@@ -33,22 +33,24 @@ const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, formData, set
     <div className={`${styles.allWrapper} ${isShow ? styles['is-show'] : null}`}>
       <div className={styles.dimOverlay} />
       <div className={`${styles.contentWrapper} ${isShow ? styles['is-show'] : null}`}>
-        <div>
-          <button className={`default-input`} onClick={onClose}>
-            닫기
+        <div className={styles.topWrapper}>
+          <div>
+            <h2 className={styles.bottomSheetTitle}>{bottomSheetTitle}</h2>
+          </div>
+          <button className={`default-input ${styles.Button}`} onClick={onClose} aria-label={'닫기'}>
+            <div className={styles.closeIconWrapper}>
+              <i className={'icon icon-close'} />
+            </div>
           </button>
-        </div>
-        <div>
-          <h2>{bottomSheetTitle}</h2>
         </div>
         <div>
           <textarea
             name='requestDetails'
             id='requestDetails'
-            cols={30}
-            rows={10}
+            className={styles.textarea}
             value={formData.requestDetails || ''}
             onChange={handleTextareaChange}
+            placeholder={'예 1) 부케를 받아달라고 요청했다.'}
           ></textarea>
         </div>
         <PrimaryButton buttonText={'다음'} onClick={onClick} disabled={!formData.requestDetails} />

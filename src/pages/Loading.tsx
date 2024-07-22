@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import styles from './Loading.module.scss';
 
 const Loading = () => {
   const navigate = useNavigate();
@@ -13,9 +14,16 @@ const Loading = () => {
   }, []);
 
   return (
-    <div>
-      <h1 className={'test'}>{'거절 생성'}</h1>
-      <p>생성하고 있어요!</p>
+    <div className={styles.layout}>
+      <div className={styles.imgWrapper}>
+        <img src='images/logo_sayno.png' alt='loading image' className={styles.img} />
+      </div>
+      <h2 className={styles.title}>
+        거절멘트를
+        <br />
+        생성하고 있어요
+      </h2>
+      <p className={styles.description}>조금만 기다려 주세요!</p>
     </div>
   );
 };

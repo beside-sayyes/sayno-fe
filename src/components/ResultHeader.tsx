@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import styles from './Header.module.scss';
+import styles from './ResultHeader.module.scss';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -10,9 +10,10 @@ const Header = () => {
 
   return (
     <div className={styles.header}>
-      <p>생성 완료</p>
       <button className={`default-input`} onClick={moveHome}>
-        메인 이동
+        <div className={styles.IconWrapper}>
+          <i className={'icon icon-home'} />
+        </div>
       </button>
     </div>
   );
