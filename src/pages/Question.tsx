@@ -12,6 +12,9 @@ interface FormData {
   requestDetails: string | null;
   gender: string | null;
   age: string | null;
+  reason: { id: number; text: string } | null;
+  style: string | null;
+  polite: string | null;
 }
 
 interface SubCategoryOptions {
@@ -28,6 +31,9 @@ const Question = () => {
     requestDetails: null,
     gender: null,
     age: null,
+    reason: null,
+    style: null,
+    polite: null,
   });
 
   const totalStep = 6;
@@ -42,8 +48,36 @@ const Question = () => {
   };
   const genderOptions = ['남', '여'];
   const ageOptions = ['10대', '20대', '30대', '40대', '50대'];
+  const reasonOptions = [
+    {
+      id: 1,
+      text: '직접 입력',
+    },
+    {
+      id: 2,
+      text: '일정이 안돼서',
+    },
+    {
+      id: 3,
+      text: '돈이 없어서',
+    },
+    {
+      id: 4,
+      text: '세이노가 알아서 해줘',
+    },
+  ];
+  const styleOptions = ['다정하게 말하고 싶어', '직구로 말하고 싶어', '웃음을 주고 싶어'];
+  const politeOptions = ['반말로 거절하고 싶어', '존댓말로 거절하고 싶어'];
 
   console.log('formData', formData);
+
+  const handleReasonTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      reason: prevFormData.reason ? { ...prevFormData.reason, text: value } : { id: 1, text: value },
+    }));
+  };
 
   const handleStepOneNext = () => {
     if (formData.category === null) {
@@ -69,22 +103,41 @@ const Question = () => {
   };
 
   const handleNext = () => {
-    if (step === totalStep) {
-      return;
-    }
-
     if (step === 2) {
       if (formData.gender === null) {
-        alert('성별을 입력해주세요');
+        alert('성별을 선택해주세요');
         return;
       }
     }
 
     if (step === 3) {
       if (formData.age === null) {
-        alert('나이를 입력해주세요');
+        alert('나이를 선택해주세요');
         return;
       }
+    }
+
+    if (step === 4) {
+      if (formData.reason === null) {
+        alert('거절사유를 입력해주세요');
+        return;
+      }
+    }
+
+    if (step === 5) {
+      if (formData.style === null) {
+        alert('화법을 선택해주세요');
+        return;
+      }
+    }
+
+    if (step === 6) {
+      if (formData.polite === null) {
+        alert('반말/존댓말 여부를 선택해주세요');
+        return;
+      }
+
+      navigate('/loading');
     }
 
     setStep(step + 1);
@@ -124,6 +177,12 @@ const Question = () => {
           ...prevFormData,
           [name]: value,
           subCategory: null, // category 변경 시 subCategory를 null로 설정
+        };
+      } else if (name === 'reason') {
+        const selectedReason = reasonOptions.find((reason) => reason.id === Number(value));
+        return {
+          ...prevFormData,
+          reason: selectedReason || null,
         };
       } else {
         return {
@@ -185,6 +244,35 @@ const Question = () => {
           options={ageOptions}
           name='age'
           value={formData.age}
+          onChange={handleChange}
+        />
+      ) : null}
+      {step === 4 ? (
+        <FormStep
+          question='꼭 들어갔으면 하는 거절사유가 있으실까요?'
+          options={reasonOptions}
+          name='reason'
+          value={formData.reason}
+          onChange={handleChange}
+          onReasonTextChange={handleReasonTextChange}
+        />
+      ) : null}
+      {step === 5 ? (
+        <FormStep
+          question='거절하실 때 어떤 화법으로 하시겠어요?'
+          options={styleOptions}
+          name='style'
+          value={formData.style}
+          onChange={handleChange}
+        />
+      ) : null}
+      {step === 6 ? (
+        <FormStep
+          introText={'이제 다 왔어요!'}
+          question='반말로 거절할까요? 아니면 존댓말로 거절할까요?'
+          options={politeOptions}
+          name='polite'
+          value={formData.polite}
           onChange={handleChange}
         />
       ) : null}

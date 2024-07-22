@@ -1,5 +1,5 @@
-import Header from '../components/Header.tsx';
 import { useNavigate } from 'react-router-dom';
+import ResultHeader from '../components/ResultHeader.tsx';
 
 const Result = () => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const Result = () => {
 
   return (
     <div>
-      <Header onBackClick={moveBack} headerTitle={'생성 완료'} />
+      <ResultHeader />
       Result
     </div>
   );
