@@ -1,6 +1,28 @@
-.test {
-  font-size: 30px;
-  color: black;
-  font-weight: 800;
-  padding: 20px;
+.home {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.title {
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+
+.logoWrapper {
+  width: 234px;
+  height: 110px;
+}
+
+.logoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

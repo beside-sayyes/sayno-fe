@@ -1,7 +1,7 @@
 import ProgressBar from '../components/ProgressBar.tsx';
 import Header from '../components/Header.tsx';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormStep from '../components/FormStep.tsx';
 import FixedBottomButtonWrapper from '../components/FixedBottomButtonWrapper.tsx';
 import BottomSheet from '../components/BottomSheet.tsx';
@@ -35,6 +35,9 @@ const Question = () => {
     style: null,
     polite: null,
   });
+  const [isNextDisabled, setIsNextDisabled] = useState(true);
+
+  const navigate = useNavigate();
 
   const totalStep = 6;
   const categoryOptions = ['돈', '약속', '학교', '회사', '결혼', '기타'];
@@ -70,6 +73,25 @@ const Question = () => {
   const politeOptions = ['반말로 거절하고 싶어', '존댓말로 거절하고 싶어'];
 
   console.log('formData', formData);
+
+  const getStepString = (step: number) => {
+    switch (step) {
+      case 1:
+        return '부탁 정보 입력';
+      case 2:
+        return '성별 입력';
+      case 3:
+        return '나이 입력';
+      case 4:
+        return '거절 사유 입력';
+      case 5:
+        return '화법 설정';
+      case 6:
+        return '화법 설정';
+      default:
+        return '';
+    }
+  };
 
   const handleReasonTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
@@ -193,15 +215,41 @@ const Question = () => {
     });
   };
 
-  const navigate = useNavigate();
+  const validateStep = (step: number) => {
+    switch (step) {
+      case 1:
+        return !formData.category || (isDepthQuestionShow && !formData.subCategory);
+      case 2:
+        return !formData.gender;
+      case 3:
+        return !formData.age;
+      case 4:
+        return !formData.reason;
+      case 5:
+        return !formData.style;
+      case 6:
+        return !formData.polite;
+      default:
+        return true;
+    }
+  };
+
+  useEffect(() => {
+    setIsNextDisabled(validateStep(step));
+  }, [formData, step, isDepthQuestionShow]);
 
   return (
     <div>
-      <Header onBackClick={step === 1 ? handleStepOneBack : handleBack} headerTitle={'요청 입력'} />
-      <ProgressBar step={step} totalSteps={totalStep} />
+      <Header onBackClick={step === 1 ? handleStepOneBack : handleBack} />
+      <ProgressBar step={step} stepText={getStepString(step)} totalSteps={totalStep} />
       {step === 1 && !isDepthQuestionShow ? (
         <FormStep
-          question='요청 받으신 상황을 선택해주세요!'
+          question={
+            <>
+              요청 받으신 <br />
+              상황을 선택해주세요.
+            </>
+          }
           options={categoryOptions}
           name='category'
           value={formData.category}
@@ -268,15 +316,24 @@ const Question = () => {
       ) : null}
       {step === 6 ? (
         <FormStep
-          introText={'이제 다 왔어요!'}
-          question='반말로 거절할까요? 아니면 존댓말로 거절할까요?'
+          question={
+            <>
+              존댓말을 <br />
+              사용하시겠어요?
+            </>
+          }
+          bubbleText={'이제 다 왔어요!'}
           options={politeOptions}
           name='polite'
           value={formData.polite}
           onChange={handleChange}
         />
       ) : null}
-      <FixedBottomButtonWrapper buttonText={'다음'} onClick={step === 1 ? handleStepOneNext : handleNext} />
+      <FixedBottomButtonWrapper
+        buttonText={'다음'}
+        onClick={step === 1 ? handleStepOneNext : handleNext}
+        disabled={isNextDisabled}
+      />
     </div>
   );
 };

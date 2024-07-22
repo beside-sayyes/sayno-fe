@@ -5,7 +5,27 @@
   transform: translateX(-50%);
   top: 0;
   width: 100%;
-  height: 50px;
-  border-bottom: 1px solid #eee;
+  height: 40px;
   padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Button {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backIconWrapper {
+  width: 13.5px;
+  height: 11.5px;
+}
+
+.closeIconWrapper {
+  width: 13.5px;
+  height: 13.5px;
 }

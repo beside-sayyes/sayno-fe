@@ -34,7 +34,9 @@ const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, formData, set
       <div className={styles.dimOverlay} />
       <div className={`${styles.contentWrapper} ${isShow ? styles['is-show'] : null}`}>
         <div>
-          <button onClick={onClose}>닫기</button>
+          <button className={`default-input`} onClick={onClose}>
+            닫기
+          </button>
         </div>
         <div>
           <h2>{bottomSheetTitle}</h2>
@@ -49,7 +51,7 @@ const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, formData, set
             onChange={handleTextareaChange}
           ></textarea>
         </div>
-        <PrimaryButton buttonText={'다음'} onClick={onClick} />
+        <PrimaryButton buttonText={'다음'} onClick={onClick} disabled={!formData.requestDetails} />
       </div>
     </div>
   );

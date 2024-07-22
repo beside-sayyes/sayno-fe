@@ -1,0 +1,14 @@
+.button {
+  padding: 13px;
+  text-align: center;
+  background-color: #7122F2;
+  color: #fff;
+  font-size: 18px;
+  width: 100%;
+  border-radius: 8px;
+  font-weight: 600;
+
+  &:disabled {
+    background-color: gray;
+  }
+}

@@ -1,0 +1,44 @@
+.textWrapper {
+  margin-top: 32px;
+}
+
+.question {
+  position: relative;
+  display: inline-block;
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.4;
+}
+
+.bubble {
+  position: absolute;
+  left: auto;
+  right: -100px;
+  top: 40%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #D6D6D6;
+  background-color: #565656;
+  border-radius: 12px;
+  font-weight: 400;
+  padding: 3px 8px;
+  letter-spacing: 0;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: auto;
+    bottom: -9px;
+    background-image: url("data:image/svg+xml,%0A%3Csvg width='11' height='12' viewBox='0 0 11 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.868594 11.0524C0.560458 11.3886 1.13716e-05 11.1706 1.70538e-05 10.7146L0.000140138 0.499994C0.000143929 0.223854 0.224001 -1.16066e-08 0.50014 -3.57475e-08L9.86338 -8.54308e-07C10.2984 -8.92341e-07 10.5259 0.51716 10.232 0.837861L0.868594 11.0524Z' fill='%23565656'/%3E%3C/svg%3E%0A");
+    width: 11px;
+    height: 12px;
+  }
+}
+
+.customFormWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+}

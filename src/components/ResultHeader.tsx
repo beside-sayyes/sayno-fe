@@ -11,7 +11,9 @@ const Header = () => {
   return (
     <div className={styles.header}>
       <p>생성 완료</p>
-      <button onClick={moveHome}>메인 이동</button>
+      <button className={`default-input`} onClick={moveHome}>
+        메인 이동
+      </button>
     </div>
   );
 };

@@ -1,6 +1,8 @@
+import styles from './FormStep.module.scss';
+
 interface FormStepProps {
-  introText?: string;
   question: string;
+  bubbleText?: string;
   description?: string;
   options: string[] | object[];
   name: string;
@@ -10,8 +12,8 @@ interface FormStepProps {
 }
 
 const FormStep = ({
-  introText,
   question,
+  bubbleText,
   description,
   options,
   name,
@@ -21,31 +23,43 @@ const FormStep = ({
 }: FormStepProps) => {
   return (
     <div>
-      {introText && <p>{introText}</p>}
-      <h2>{question}</h2>
-      {description && <p>{description}</p>}
-      {options.map((option, index) => {
-        const isObject = typeof option === 'object';
-        const optionValue = typeof option === 'object' ? option.id : option;
-        const optionText = typeof option === 'object' ? option.text : option;
-        const isChecked = typeof value === 'object' ? value && value.id === option.id : value === option;
+      <div className={styles.textWrapper}>
+        <h2 className={styles.question}>
+          {question}
+          {bubbleText && <span className={styles.bubble}>이제 다 왔어요!</span>}
+        </h2>
+        {description && <p>{description}</p>}
+      </div>
+      <div className={styles.customFormWrapper}>
+        {options.map((option, index) => {
+          const isObject = typeof option === 'object';
+          const optionValue = typeof option === 'object' ? option.id : option;
+          const optionText = typeof option === 'object' ? option.text : option;
+          const isChecked = typeof value === 'object' ? value && value.id === option.id : value === option;
 
-        return (
-          <div key={index}>
-            <label>
-              <input type='radio' name={name} value={optionValue} checked={isChecked} onChange={onChange} />
-              {optionText}
-            </label>
-            {isObject && optionValue === 1 && isChecked && (
-              <textarea
-                value={typeof value === 'object' && value.id === 1 ? value.text : ''}
-                onChange={onReasonTextChange}
-                placeholder='직접 입력하세요'
-              />
-            )}
-          </div>
-        );
-      })}
+          return (
+            <div key={index}>
+              <label>
+                <div>
+                  <div>
+                    <i className={'icon icon-close'} />
+                  </div>
+                  <span>돈</span>
+                </div>
+                <input type='radio' name={name} value={optionValue} checked={isChecked} onChange={onChange} />
+                {optionText}
+              </label>
+              {isObject && optionValue === 1 && isChecked && (
+                <textarea
+                  value={typeof value === 'object' && value.id === 1 ? value.text : ''}
+                  onChange={onReasonTextChange}
+                  placeholder='직접 입력하세요'
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
