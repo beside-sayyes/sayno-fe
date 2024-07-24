@@ -1,8 +1,14 @@
 .wrapper {
-  position: absolute;
+  position: fixed;
   top: auto;
   left: 0;
   width: 100%;
   bottom: 0;
+}
+
+.inner {
+  max-width: 500px;
+  margin: 0 auto;
   padding: 16px 16px 48px 16px;
+  background-color: #232323;
 }

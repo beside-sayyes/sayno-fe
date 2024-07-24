@@ -1,3 +1,18 @@
+.progressBarWrapper {
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: 40px;
+  width: 100%;
+}
+
+.inner {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  background-color: #232323;
+}
+
 .stepTextWrapper {
   display: flex;
   justify-content: space-between;
@@ -27,7 +42,7 @@
 .progressSegment {
   flex: 1;
 
-  margin: 0 8px; // 개별바 사이 마진
+  margin: 0 4px; // 개별바 사이 마진
   background-color: #3D3D3D;
   transition: background-color 0.3s;
   border-radius: 4px;
