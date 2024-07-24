@@ -10,7 +10,9 @@ interface FixedBottomButtonWrapperProps {
 const FixedBottomButtonWrapper = ({ onClick, buttonText, disabled }: FixedBottomButtonWrapperProps) => {
   return (
     <div className={styles.wrapper}>
-      <PrimaryButton buttonText={buttonText} onClick={onClick} disabled={disabled} />
+      <div className={styles.inner}>
+        <PrimaryButton buttonText={buttonText} onClick={onClick} disabled={disabled} />
+      </div>
     </div>
   );
 };

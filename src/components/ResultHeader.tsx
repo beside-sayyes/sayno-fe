@@ -10,11 +10,13 @@ const Header = () => {
 
   return (
     <div className={styles.header}>
-      <button className={`default-input`} onClick={moveHome}>
-        <div className={styles.IconWrapper}>
-          <i className={'icon icon-home'} />
-        </div>
-      </button>
+      <div className={styles.inner}>
+        <button className={`default-input`} onClick={moveHome}>
+          <div className={styles.IconWrapper}>
+            <i className={'icon icon-home'} />
+          </div>
+        </button>
+      </div>
     </div>
   );
 };
