@@ -16,7 +16,7 @@ const Loading = () => {
   return (
     <div className={styles.layout}>
       <div className={styles.imgWrapper}>
-        <img src='images/logo_sayno.png' alt='loading image' className={styles.img} />
+        <img src='images/img_purple_heart.png' alt='loading image' className={styles.img} />
       </div>
       <h2 className={styles.title}>
         거절멘트를

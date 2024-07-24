@@ -38,6 +38,7 @@ const FormStep = ({
           const optionValue = typeof option === 'object' ? option.id : option;
           const optionText = typeof option === 'object' ? option.text : option;
           const isChecked = typeof value === 'object' ? value && value.id === option.id : value === option;
+          const noSpaceOptionText = optionText.replace(/\s+/g, '');
 
           return (
             <div key={index} className={`${styles.customLabelWrapper} ${isChecked ? styles['is-selected'] : null}`}>
@@ -45,7 +46,7 @@ const FormStep = ({
                 {iconStyle ? (
                   <div className={styles.customIconWrapper}>
                     <div className={styles.customIconBox}>
-                      <i className={'icon icon-close'} />
+                      <i className={`icon icon-${noSpaceOptionText}`} />
                     </div>
                   </div>
                 ) : null}

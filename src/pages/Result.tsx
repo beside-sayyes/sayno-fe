@@ -20,13 +20,13 @@ const Result = () => {
         {/* 결과 박스 */}
         <div className={styles.resultItemWrapper}>
           <div className={styles.resultItemTitleWrapper}>
+            <div className={styles.imgWrapper}>
+              <img src='/images/img_cmark.png' alt='mark image' className={styles.img} />
+            </div>
             <h2 className={styles.title}>
               세이노는 상황을 <br />
               이렇게 해석했어요
             </h2>
-            <div className={styles.imgWrapper}>
-              <img src='/images/img_mark.png' alt='mark image' className={styles.img} />
-            </div>
           </div>
           <p className={styles.description}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid architecto at aut deleniti eveniet,
@@ -37,13 +37,13 @@ const Result = () => {
         {/* 결과 박스 */}
         <div className={styles.resultItemWrapper}>
           <div className={styles.resultItemTitleWrapper}>
+            <div className={styles.imgWrapper}>
+              <img src='/images/img_cmark.png' alt='mark image' className={styles.img} />
+            </div>
             <h2 className={styles.title}>
               이렇게 거절해 보시는 건 <br />
               어떨까요?
             </h2>
-            <div className={styles.imgWrapper}>
-              <img src='/images/img_mark.png' alt='mark image' className={styles.img} />
-            </div>
           </div>
           <p className={styles.description}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid architecto at aut deleniti eveniet,
