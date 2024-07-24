@@ -1,23 +1,25 @@
 import styles from './BottomSheet.module.scss';
 import PrimaryButton from './PrimaryButton.tsx';
 
+interface FormData {
+  category: string | null;
+  subCategory: string | null;
+  requestDetails: string | null;
+  gender: string | null;
+  age: string | null;
+  reason: { id: number; text: string } | null;
+  style: string | null;
+  polite: string | null;
+}
+
 interface BottomSheetProps {
   isShow: boolean;
   bottomSheetTitle: string;
+  bottomSheetDesciption: string;
   onClose: () => void;
   onClick: () => void;
-  formData: {
-    category: string | null;
-    subCategory: string | null;
-    requestDetails: string | null;
-  };
-  setFormData: React.Dispatch<
-    React.SetStateAction<{
-      category: string | null;
-      subCategory: string | null;
-      requestDetails: string | null;
-    }>
-  >;
+  formData: FormData;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
 }
 
 const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, formData, setFormData }: BottomSheetProps) => {

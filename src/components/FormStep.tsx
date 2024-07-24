@@ -1,10 +1,15 @@
 import styles from './FormStep.module.scss';
 
+interface OptionObject {
+  id: number;
+  text: string;
+}
+
 interface FormStepProps {
-  question: string;
+  question: string | React.ReactNode;
   bubbleText?: string;
   description?: string;
-  options: string[] | object[];
+  options: string[] | OptionObject[];
   name: string;
   value: string | { id: number; text: string } | null;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -35,9 +40,11 @@ const FormStep = ({
       <div className={iconStyle ? styles.customIconFormWrapper : styles.customNormalWrapper}>
         {options.map((option, index) => {
           const isObject = typeof option === 'object';
-          const optionValue = typeof option === 'object' ? option.id : option;
-          const optionText = typeof option === 'object' ? option.text : option;
-          const isChecked = typeof value === 'object' ? value && value.id === option.id : value === option;
+          const optionValue = isObject ? (option as OptionObject).id : option;
+          const optionText = isObject ? (option as OptionObject).text : option;
+          const isChecked = isObject
+            ? value && typeof value === 'object' && value.id === (option as OptionObject).id
+            : value === option;
           const noSpaceOptionText = optionText.replace(/\s+/g, '');
 
           return (
@@ -54,7 +61,7 @@ const FormStep = ({
                   type='radio'
                   name={name}
                   value={optionValue}
-                  checked={isChecked}
+                  checked={!!isChecked}
                   onChange={onChange}
                   style={{ display: 'none' }}
                 />
@@ -63,7 +70,7 @@ const FormStep = ({
               {isObject && optionValue === 1 && isChecked && (
                 <textarea
                   className={styles.textarea}
-                  value={typeof value === 'object' && value.id === 1 ? value.text : ''}
+                  value={typeof value === 'object' && value && value.id === 1 ? value.text : ''}
                   onChange={onReasonTextChange}
                   placeholder='예 1) 부케를 받아달라고 요청했다.'
                 />
