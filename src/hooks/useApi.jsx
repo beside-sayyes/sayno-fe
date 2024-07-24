@@ -9,7 +9,7 @@ const useApi = () => {
 
   const config = {
     osName: 'Web',
-    appVersion: '0.0.1', // TODO: 라이브 배포 시 최신 버전으로 업데이트
+    appVersion: '0.0.2', // TODO: 라이브 배포 시 최신 버전으로 업데이트
     deviceModel: device?.model,
     userTimeZone: userTimeZone,
     deviceType: device?.type === undefined ? 'desktop' : device?.type, // desktop의 경우 parser의 반환값이 undefined라 별도의 string 부여
