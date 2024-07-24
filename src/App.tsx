@@ -4,6 +4,7 @@ import Home from './pages/Home.tsx';
 import Question from './pages/Question.tsx';
 import Loading from './pages/Loading.tsx';
 import Result from './pages/Result.tsx';
+import Error from './pages/Error.tsx';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: '/result',
         element: <Result />,
+      },
+      {
+        path: '*',
+        element: <Error />,
       },
     ],
   },

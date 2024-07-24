@@ -17,7 +17,7 @@ const Home = () => {
           AI 거절멘트 생성 서비스
         </h1>
         <div className={styles.logoWrapper}>
-          <img src='images/logo_sayno.png' alt='sayno logo' />
+          <img className={styles.logoImg} src='images/logo_sayno.png' alt='sayno logo' />
         </div>
       </div>
       <FixedBottomButtonWrapper buttonText={'시작해 볼까요?'} onClick={moveQuestion} />

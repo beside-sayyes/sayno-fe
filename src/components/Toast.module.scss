@@ -1,0 +1,53 @@
+@keyframes slideIn {
+  from {
+    bottom: 10px;
+    opacity: 0;
+  }
+  to {
+    bottom: 38px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.toastWrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: auto;
+  bottom: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background-color: #242C32;
+  width: 90%;
+  padding: 14px 16px;
+  opacity: 0;
+}
+
+.toastWrapper.isShow {
+  animation: slideIn 0.2s ease-out forwards, fadeOut 4s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
+}
+
+.toastIconWrapper {
+  width: 20px;
+  height: 20px;
+}
+
+.toastText {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  margin-top: 3px;
+}

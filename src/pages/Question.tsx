@@ -259,7 +259,12 @@ const Question = () => {
       ) : null}
       {step === 1 && isDepthQuestionShow && formData.category ? (
         <FormStep
-          question={`'${formData.category}'를 선택하셨네요! 어떤 상황이셨어요?`}
+          question={
+            <>
+              <span className='highlight'>{formData.category}</span>를 선택하셨네요! <br />
+              어떤 상황이셨어요?
+            </>
+          }
           options={subCategoryOptions[formData.category] || []}
           name='subCategory'
           value={formData.subCategory}

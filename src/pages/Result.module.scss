@@ -27,15 +27,27 @@
   object-fit: cover;
 }
 
+.descriptionWrapper {
+  overflow: hidden;
+  position: relative;
+  border-radius: 12px;
+  margin-top: 16px;
+
+  &.typeReject {
+
+    .description {
+      min-height: 100px;
+    }
+  }
+}
+
 .description {
   font-size: 16px;
   font-weight: 500;
   color: #fff;
   padding: 16px;
   background-color: #313131;
-  border-radius: 7px;
   line-height: 1.5;
-  margin-top: 16px;
 }
 
 .buttonWrapper {
@@ -64,7 +76,7 @@
   align-items: center;
   gap: 4px;
   border: 1px solid #565656;
-  border-radius: 7px;
+  border-radius: 12px;
   height: 40px;
 }
 
@@ -74,7 +86,7 @@
   justify-content: center;
   align-items: center;
   gap: 4px;
-  border-radius: 7px;
+  border-radius: 12px;
   height: 40px;
   background-color: #7122F2;
 }
@@ -94,6 +106,42 @@
   text-decoration: underline;
 }
 
+.tipItemWrapper {
+  background-color: #313131;
+  padding: 24px 16px;
+  margin-left: -16px;
+  margin-right: -16px;
+}
+
+.tipItemTitleWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tipItemImgWrapper {
+  width: 24px;
+  height: 24px;
+}
+
+.tipTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.tipDescription {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #565656;
+  padding: 16px;
+  border-radius: 12px;
+  line-height: 1.5;
+}
+
 .recommendationWrapper {
   padding: 48px 0;
 }
@@ -104,21 +152,36 @@
   color: #D6D6D6;
   text-align: center;
   line-height: 1.5;
-  margin-bottom: 11px;
+  margin-bottom: 18px;
+  letter-spacing: -.5px;
 }
 
 .recommendationButton {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 72px;
-  height: 72px;
+  width: 80px;
+  height: 80px;
   background-color: #313131;
   border-radius: 50%;
   margin: 0 auto;
+  gap: 3px;
+}
+
+.recommendationSubComment {
+  color: #7122F2;
+  letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
 .iconWrapper {
-  width: 32.5px;
-  height: 29px;
+  width: 24px;
+  height: 24px;
+}
+
+.recommendationText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff
 }
