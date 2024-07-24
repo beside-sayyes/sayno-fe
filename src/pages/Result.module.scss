@@ -1,0 +1,187 @@
+.resultItemWrapper {
+  margin-bottom: 48px;
+}
+
+.resultItemTitleWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.5;
+}
+
+.imgWrapper {
+  width: 32px;
+  height: 32px;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.descriptionWrapper {
+  overflow: hidden;
+  position: relative;
+  border-radius: 12px;
+  margin-top: 16px;
+
+  &.typeReject {
+
+    .description {
+      min-height: 100px;
+    }
+  }
+}
+
+.description {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  padding: 16px;
+  background-color: #313131;
+  line-height: 1.5;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.buttonIconWrapper {
+  width: 16px;
+  height: 16px;
+}
+
+.buttonText {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.editButton {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #565656;
+  border-radius: 12px;
+  height: 40px;
+}
+
+.copyButton {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 12px;
+  height: 40px;
+  background-color: #7122F2;
+}
+
+.retryButtonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.retryButton {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  color: #959595;
+  text-decoration: underline;
+}
+
+.tipItemWrapper {
+  background-color: #313131;
+  padding: 24px 16px;
+  margin-left: -16px;
+  margin-right: -16px;
+}
+
+.tipItemTitleWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tipItemImgWrapper {
+  width: 24px;
+  height: 24px;
+}
+
+.tipTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.tipDescription {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #565656;
+  padding: 16px;
+  border-radius: 12px;
+  line-height: 1.5;
+}
+
+.recommendationWrapper {
+  padding: 48px 0;
+}
+
+.recommendationComment {
+  font-size: 20px;
+  font-weight: 600;
+  color: #D6D6D6;
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 18px;
+  letter-spacing: -.5px;
+}
+
+.recommendationButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  background-color: #313131;
+  border-radius: 50%;
+  margin: 0 auto;
+  gap: 3px;
+}
+
+.recommendationSubComment {
+  color: #7122F2;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.iconWrapper {
+  width: 24px;
+  height: 24px;
+}
+
+.recommendationText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff
+}

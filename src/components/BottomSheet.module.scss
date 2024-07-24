@@ -1,0 +1,88 @@
+.allWrapper {
+  z-index: 20;
+  position: absolute;
+  left: 0;
+  top: auto;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s;
+
+  &.is-show {
+    opacity: 1;
+    pointer-events: visible;
+  }
+}
+
+.dimOverlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(#000, 0.6);
+}
+
+.contentWrapper {
+  position: relative;
+  z-index: 1;
+  height: 329px;
+  width: 100%;
+  bottom: -100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  transition: all 0.4s ease-in-out;
+  background-color: #313131;
+  border-radius: 20px 20px 0 0;
+  padding: 24px 16px;
+
+  &.is-show {
+    bottom: 0;
+  }
+}
+
+.topWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.Button {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.closeIconWrapper {
+  width: 13.5px;
+  height: 13.5px;
+}
+
+.bottomSheetTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.5;
+}
+
+.textarea {
+  width: 100%;
+  height: 130px;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #747474;
+  background-color: #232323;
+  color: #fff;
+  line-height: 1.4;
+}

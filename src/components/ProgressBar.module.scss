@@ -1,0 +1,46 @@
+.stepTextWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.stepText {
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.stepNumber {
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.progressBar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 8px;
+}
+
+.progressSegment {
+  flex: 1;
+
+  margin: 0 8px; // 개별바 사이 마진
+  background-color: #3D3D3D;
+  transition: background-color 0.3s;
+  border-radius: 4px;
+}
+
+.progressSegment.filled {
+  background-color: #7122F2;
+}
+
+.progressSegment:first-child {
+  margin-left: 0;
+}
+
+.progressSegment:last-child {
+  margin-right: 0;
+}

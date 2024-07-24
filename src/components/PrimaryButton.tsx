@@ -1,12 +1,17 @@
+import styles from './PrimaryButton.module.scss';
+
 interface PrimaryButtonProps {
   buttonText: string;
   onClick: () => void;
+  disabled?: boolean;
 }
 
-const PrimaryButton = ({ buttonText, onClick }: PrimaryButtonProps) => {
+const PrimaryButton = ({ buttonText, onClick, disabled }: PrimaryButtonProps) => {
   return (
     <div>
-      <button onClick={onClick}>{buttonText}</button>
+      <button className={`default-input ${styles.button}`} onClick={onClick} disabled={disabled}>
+        {buttonText}
+      </button>
     </div>
   );
 };

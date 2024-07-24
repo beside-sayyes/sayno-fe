@@ -1,7 +1,15 @@
-.test222 {
-  //border: 3px solid red;
-
-  .test333 {
-    border: 3px solid blue;
-  }
+.default-input {
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
 }
+
+.highlight {
+  color: #5AF7E8;
+}
+

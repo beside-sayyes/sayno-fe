@@ -1,18 +1,26 @@
 import styles from './Home.module.scss';
-import PrimaryButton from '../components/PrimaryButton.tsx';
 import { useNavigate } from 'react-router-dom';
+import FixedBottomButtonWrapper from '../components/FixedBottomButtonWrapper.tsx';
 
 const Home = () => {
   const navigate = useNavigate();
 
-  const moveRequestQuestion = () => {
-    navigate('/request-question');
+  const moveQuestion = () => {
+    navigate('/question');
   };
 
   return (
-    <div>
-      <h1 className={styles.test}>관계도 지켜주고 시간도 아껴줘요</h1>
-      <PrimaryButton buttonText={'시작해볼까요?'} onClick={moveRequestQuestion} />
+    <div className={styles.home}>
+      <div>
+        <h1 className={styles.title}>
+          시간과 관계를 지켜주는 <br />
+          AI 거절멘트 생성 서비스
+        </h1>
+        <div className={styles.logoWrapper}>
+          <img className={styles.logoImg} src='images/logo_sayno.png' alt='sayno logo' />
+        </div>
+      </div>
+      <FixedBottomButtonWrapper buttonText={'시작해 볼까요?'} onClick={moveQuestion} />
     </div>
   );
 };
