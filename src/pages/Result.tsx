@@ -241,7 +241,7 @@ const Result = () => {
           className={`default-input ${styles.recommendationButton}`}
           type={'button'}
           aria-label={'공유링크 복사'}
-          onClick={() => handleUrlCopyClipBoard('https://sayno.com')}
+          onClick={() => handleUrlCopyClipBoard('https://justsayno.netlify.app')}
         >
           <div className={styles.iconWrapper}>
             <i className={'icon icon-share'} />
