@@ -72,8 +72,15 @@ const Question = () => {
       text: '세이노가 알아서 해줘',
     },
   ];
-  const styleOptions = ['다정하게 말하고 싶어', '직구로 말하고 싶어', '웃음을 주고 싶어'];
-  const politeOptions = ['반말로 거절하고 싶어', '존댓말로 거절하고 싶어'];
+  const styleOptions = ['다정하게', '직구로', '유머러스하게'];
+  const politeOptions = ['존댓말 사용', '반말 사용'];
+
+  const getParticle = (word: string) => {
+    if (!word) return '';
+    const lastChar = word.charCodeAt(word.length - 1);
+    const hasBatchim = (lastChar - 0xac00) % 28 !== 0;
+    return hasBatchim ? '을' : '를';
+  };
 
   const getStepString = (step: number) => {
     switch (step) {
@@ -297,7 +304,7 @@ const Question = () => {
           question={
             <>
               요청 받으신 <br />
-              상황을 선택해주세요.
+              상황을 선택해주세요!
             </>
           }
           options={categoryOptions}
@@ -311,7 +318,8 @@ const Question = () => {
         <FormStep
           question={
             <>
-              <span className='highlight'>{formData.category}</span>를 선택하셨네요! <br />
+              <span className='highlight'>{formData.category}</span>
+              {getParticle(formData.category)} 선택하셨네요! <br />
               어떤 상황이셨어요?
             </>
           }
@@ -335,8 +343,13 @@ const Question = () => {
       ) : null}
       {step === 2 ? (
         <FormStep
-          question='요청하신 분의 성별을 알려주세요!'
-          description={'성별에 따라 거절멘트의 어투가 달라질 수 있어요'}
+          question={
+            <>
+              상대방의 <br />
+              성별을 알려주세요!
+            </>
+          }
+          description={'요청자의 성별에 따라 호칭이 달라질 수 있어요'}
           options={genderOptions}
           name='gender'
           value={formData.gender}
@@ -345,8 +358,13 @@ const Question = () => {
       ) : null}
       {step === 3 ? (
         <FormStep
-          question='요청하신 분의 나이를 알려주세요!'
-          description={'연령대에 맞는 멘트를 생성해드려요'}
+          question={
+            <>
+              상대방의 <br />
+              나이를 알려주세요!
+            </>
+          }
+          description={'요청자의 연령대에 맞는 멘트를 생성해드려요'}
           options={ageOptions}
           name='age'
           value={formData.age}
@@ -355,7 +373,12 @@ const Question = () => {
       ) : null}
       {step === 4 ? (
         <FormStep
-          question='꼭 들어갔으면 하는 거절사유가 있으실까요?'
+          question={
+            <>
+              거절하시는 이유는 <br />
+              무엇인가요?
+            </>
+          }
           options={reasonOptions}
           name='reason'
           value={formData.reason}
@@ -365,7 +388,12 @@ const Question = () => {
       ) : null}
       {step === 5 ? (
         <FormStep
-          question='거절하실 때 어떤 화법으로 하시겠어요?'
+          question={
+            <>
+              어떤 화법으로 <br />
+              거절하시겠어요?
+            </>
+          }
           options={styleOptions}
           name='style'
           value={formData.style}

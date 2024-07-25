@@ -194,7 +194,11 @@ const Result = () => {
             </div>
             <h2 className={styles.tipTitle}>대면 거절시 꿀팁</h2>
           </div>
-          <p className={styles.tipDescription}>단호하게, 그러나 친절하게 말하세요.</p>
+          <p className={styles.tipDescription}>
+            "와, 부케를 나한테 주다니 정말 고마워! 하지만 난 아직 마음의 준비가 안 됐나 봐. 부케를 받으면 3개월 안에
+            결혼해야 한다는 말이 있잖아? 나 아직 연애도 시작 못했는데! 다른 친구에게 기회를 주는 게 어떨까? 그래도
+            초대해줘서 정말 고마워, 멋진 결혼식 기대할게!"
+          </p>
         </div>
       </div>
       {/* 추천해주세요 */}

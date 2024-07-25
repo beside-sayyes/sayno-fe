@@ -1,5 +1,6 @@
 import styles from './BottomSheet.module.scss';
 import PrimaryButton from './PrimaryButton.tsx';
+import { useEffect, useRef } from 'react';
 
 interface FormData {
   category: string | null;
@@ -23,6 +24,8 @@ interface BottomSheetProps {
 }
 
 const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, formData, setFormData }: BottomSheetProps) => {
+  const textareaRef = useRef(null);
+
   const handleTextareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
     setFormData((prevFormData) => ({
@@ -30,6 +33,12 @@ const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, formData, set
       requestDetails: value,
     }));
   };
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.placeholder = '예 1) 부케를 받아달라고 요청했다.\n예 2) 사업자금을 빌려달라고 요청했다.';
+    }
+  }, []);
 
   return (
     <div className={`${styles.allWrapper} ${isShow ? styles['is-show'] : null}`}>
@@ -47,13 +56,14 @@ const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, formData, set
         </div>
         <div>
           <textarea
+            ref={textareaRef}
             name='requestDetails'
             id='requestDetails'
             className={styles.textarea}
             value={formData.requestDetails || ''}
             onChange={handleTextareaChange}
-            placeholder={'예 1) 부케를 받아달라고 요청했다.'}
-          ></textarea>
+            placeholder={''}
+          />
         </div>
         <PrimaryButton buttonText={'다음'} onClick={onClick} disabled={!formData.requestDetails} />
       </div>
