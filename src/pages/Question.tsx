@@ -284,7 +284,7 @@ const Question = () => {
 
       navigate(`/result?refuse_id=${refuseId}&emotion_id=${emotionId}`);
     } catch (error) {
-      console.error('Error:', error);
+      console.log(error);
     } finally {
       setIsLoading(false);
     }

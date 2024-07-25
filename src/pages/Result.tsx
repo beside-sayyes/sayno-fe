@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner.tsx';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import PrimaryButton from '../components/PrimaryButton.tsx';
 
 const Result = () => {
   const [isShowToast, setIsShowToast] = useState(false);
@@ -61,7 +60,7 @@ const Result = () => {
       const data = response?.data?.data;
       setEmotionAndIntentText(data?.emotionAndIntentText);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.log(error);
     } finally {
       setIsEmotionLoading(false);
     }
@@ -79,7 +78,7 @@ const Result = () => {
       const data = response?.data?.data;
       setRefuseMessage(data?.refuseText);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -98,7 +97,7 @@ const Result = () => {
       const newRefuseId = data;
       navigate(`/result?refuse_id=${newRefuseId}&emotion_id=${emotionId}`);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
