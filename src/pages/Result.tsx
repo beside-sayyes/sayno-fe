@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner.tsx';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import PrimaryButton from '../components/PrimaryButton.tsx';
 
 const Result = () => {
   const [isShowToast, setIsShowToast] = useState(false);
@@ -14,6 +15,7 @@ const Result = () => {
   const [emotionAndIntentText, setEmotionAndIntentText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isEmotionLoading, setIsEmotionLoading] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const rejectCommentRef = useRef<HTMLParagraphElement>(null);
 
   const navigate = useNavigate();
@@ -148,43 +150,72 @@ const Result = () => {
           </div>
           <div className={`${styles.descriptionWrapper} ${styles.typeReject}`}>
             {isLoading ? <LoadingSpinner /> : null}
-            <p className={styles.description} ref={rejectCommentRef}>
+            <p
+              className={styles.description}
+              ref={rejectCommentRef}
+              contentEditable={isEditing}
+              suppressContentEditableWarning={true}
+            >
               {refuseMessage}
             </p>
           </div>
-          <div>
-            <div className={styles.buttonWrapper}>
-              <button type={'button'} className={`default-input ${styles.editButton}`} disabled={isLoading}>
-                <div className={styles.buttonIconWrapper}>
-                  <i className={`icon icon-edit ${isLoading ? 'is-disabled' : null}`} />
-                </div>
-                <span className={styles.buttonText}>수정하기</span>
-              </button>
-              <button
-                type={'button'}
-                className={`default-input ${styles.copyButton}`}
-                onClick={handleRejectCommentCopyClipBoard}
-                disabled={isLoading}
-              >
-                <div className={styles.buttonIconWrapper}>
-                  <i className={`icon icon-copy ${isLoading ? 'is-disabled' : null}`} />
-                </div>
-                <span className={styles.buttonText}>복사하기</span>
-              </button>
+          {!isEditing ? (
+            <div className={styles.buttonAllWrapper}>
+              <div className={styles.buttonWrapper}>
+                <button
+                  type={'button'}
+                  className={`default-input ${styles.editButton}`}
+                  disabled={isLoading}
+                  onClick={() => {
+                    setIsEditing(true);
+                  }}
+                >
+                  <div className={styles.buttonIconWrapper}>
+                    <i className={`icon icon-edit ${isLoading ? 'is-disabled' : null}`} />
+                  </div>
+                  <span className={styles.buttonText}>수정하기</span>
+                </button>
+                <button
+                  type={'button'}
+                  className={`default-input ${styles.copyButton}`}
+                  onClick={handleRejectCommentCopyClipBoard}
+                  disabled={isLoading}
+                >
+                  <div className={styles.buttonIconWrapper}>
+                    <i className={`icon icon-copy ${isLoading ? 'is-disabled' : null}`} />
+                  </div>
+                  <span className={styles.buttonText}>복사하기</span>
+                </button>
+              </div>
+              <div className={styles.retryButtonWrapper}>
+                <button
+                  type={'button'}
+                  className={`default-input ${styles.retryButton}`}
+                  disabled={isLoading}
+                  onClick={() => {
+                    reRegisterRefuseMessage(Number(refuseId));
+                  }}
+                >
+                  다시 만들래
+                </button>
+              </div>
             </div>
-            <div className={styles.retryButtonWrapper}>
+          ) : null}
+
+          {isEditing ? (
+            <div className={styles.buttonAllWrapper}>
               <button
                 type={'button'}
-                className={`default-input ${styles.retryButton}`}
-                disabled={isLoading}
+                className={`default-input ${styles.copyButton} ${styles.typeFull}`}
                 onClick={() => {
-                  reRegisterRefuseMessage(Number(refuseId));
+                  setIsEditing(false);
+                  setRefuseMessage(rejectCommentRef.current?.innerText || '');
                 }}
               >
-                다시 만들래
+                <span className={styles.buttonText}>수정완료</span>
               </button>
             </div>
-          </div>
+          ) : null}
         </div>
         {/* 꿀팁 */}
         <div className={styles.tipItemWrapper}>

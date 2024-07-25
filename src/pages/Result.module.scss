@@ -51,12 +51,15 @@
   min-height: 200px;
 }
 
+.buttonAllWrapper {
+  margin-top: 16px;
+}
+
 .buttonWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  margin-top: 16px;
 }
 
 .buttonIconWrapper {
@@ -97,6 +100,10 @@
   border-radius: 12px;
   height: 40px;
   background-color: #7122F2;
+
+  &.typeFull {
+    width: 100%;
+  }
 
   &:disabled {
     background-color: #565656;
