@@ -37,7 +37,7 @@
 }
 
 .toastWrapper.isShow {
-  animation: slideIn 0.2s ease-out forwards, fadeOut 4s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
+  animation: slideIn 0.2s ease-out forwards, fadeOut 2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
 }
 
 .toastIconWrapper {

@@ -159,7 +159,9 @@ const Question = () => {
         return;
       }
 
-      navigate('/loading');
+      generateSaynoMessage();
+      // navigate('/loading');
+      return;
     }
 
     setStep(step + 1);
@@ -232,6 +234,10 @@ const Question = () => {
       default:
         return true;
     }
+  };
+
+  const generateSaynoMessage = () => {
+    console.log('api 호출');
   };
 
   useEffect(() => {
