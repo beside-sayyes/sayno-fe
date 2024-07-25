@@ -13,9 +13,9 @@ const Home = () => {
     <div className={styles.home}>
       <div>
         <h1 className={styles.title}>
-          관계도 지켜주고,
+          시간과 관계를 지켜주는
           <br />
-          시간도 아껴줘요
+          AI 거절멘트 생성 서비스
         </h1>
         <div className={styles.logoWrapper}>
           <img className={styles.logoImg} src='images/logo_sayno.png' alt='sayno logo' />
