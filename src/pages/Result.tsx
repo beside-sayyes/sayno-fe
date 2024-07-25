@@ -5,6 +5,7 @@ import Toast from '../components/Toast.tsx';
 import { useEffect, useRef, useState } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner.tsx';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Result = () => {
   const [isShowToast, setIsShowToast] = useState(false);
@@ -15,6 +16,7 @@ const Result = () => {
   const [isEmotionLoading, setIsEmotionLoading] = useState(false);
   const rejectCommentRef = useRef<HTMLParagraphElement>(null);
 
+  const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const refuseId = queryParams.get('refuse_id');
   const emotionId = queryParams.get('emotion_id');
@@ -74,6 +76,25 @@ const Result = () => {
       });
       const data = response?.data?.data;
       setRefuseMessage(data?.refuseText);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const reRegisterRefuseMessage = async (id: number) => {
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/refuse/re-register/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = response?.data?.data;
+      const newRefuseId = data;
+      navigate(`/result?refuse_id=${newRefuseId}&emotion_id=${emotionId}`);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -152,7 +173,14 @@ const Result = () => {
               </button>
             </div>
             <div className={styles.retryButtonWrapper}>
-              <button type={'button'} className={`default-input ${styles.retryButton}`} disabled={isLoading}>
+              <button
+                type={'button'}
+                className={`default-input ${styles.retryButton}`}
+                disabled={isLoading}
+                onClick={() => {
+                  reRegisterRefuseMessage(Number(refuseId));
+                }}
+              >
                 다시 만들래
               </button>
             </div>
