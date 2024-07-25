@@ -95,7 +95,7 @@ const Question = () => {
       case 5:
         return '화법 설정';
       case 6:
-        return '화법 설정';
+        return '존댓말 사용 여부';
       default:
         return '';
     }

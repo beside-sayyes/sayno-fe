@@ -56,6 +56,7 @@ const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, formData, set
         </div>
         <div>
           <textarea
+            maxLength={500}
             ref={textareaRef}
             name='requestDetails'
             id='requestDetails'
