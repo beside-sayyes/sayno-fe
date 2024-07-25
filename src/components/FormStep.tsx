@@ -69,10 +69,11 @@ const FormStep = ({
               </label>
               {isObject && optionValue === 1 && isChecked && (
                 <textarea
+                  maxLength={500}
                   className={styles.textarea}
                   value={typeof value === 'object' && value && value.id === 1 ? value.text : ''}
                   onChange={onReasonTextChange}
-                  placeholder='예 1) 부케를 받아달라고 요청했다.'
+                  placeholder='500자 이내로 입력해주세요~'
                 />
               )}
             </div>
