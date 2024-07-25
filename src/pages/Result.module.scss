@@ -48,6 +48,7 @@
   padding: 16px;
   background-color: #313131;
   line-height: 1.5;
+  min-height: 200px;
 }
 
 .buttonWrapper {
@@ -78,6 +79,13 @@
   border: 1px solid #565656;
   border-radius: 12px;
   height: 40px;
+
+  &:disabled {
+
+    .buttonText {
+      color: #747474;
+    }
+  }
 }
 
 .copyButton {
@@ -89,6 +97,14 @@
   border-radius: 12px;
   height: 40px;
   background-color: #7122F2;
+
+  &:disabled {
+    background-color: #565656;
+
+    .buttonText {
+      color: #747474;
+    }
+  }
 }
 
 .retryButtonWrapper {
@@ -104,6 +120,10 @@
   font-weight: 400;
   color: #959595;
   text-decoration: underline;
+
+  &:disabled {
+    color: #3D3D3D;
+  }
 }
 
 .tipItemWrapper {

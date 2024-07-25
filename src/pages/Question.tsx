@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import FormStep from '../components/FormStep.tsx';
 import FixedBottomButtonWrapper from '../components/FixedBottomButtonWrapper.tsx';
 import BottomSheet from '../components/BottomSheet.tsx';
+import axios from 'axios';
+import Loading from '../components/Loading.tsx';
 
 interface FormData {
   category: string | null;
@@ -23,6 +25,7 @@ interface SubCategoryOptions {
 
 const Question = () => {
   const [step, setStep] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   const [isDepthQuestionShow, setIsDepthQuestionShow] = useState(false);
   const [isBottomSheetShow, setIsBottomSheetShow] = useState(false);
   const [formData, setFormData] = useState<FormData>({
@@ -71,8 +74,6 @@ const Question = () => {
   ];
   const styleOptions = ['다정하게 말하고 싶어', '직구로 말하고 싶어', '웃음을 주고 싶어'];
   const politeOptions = ['반말로 거절하고 싶어', '존댓말로 거절하고 싶어'];
-
-  console.log('formData', formData);
 
   const getStepString = (step: number) => {
     switch (step) {
@@ -160,7 +161,6 @@ const Question = () => {
       }
 
       generateSaynoMessage();
-      // navigate('/loading');
       return;
     }
 
@@ -236,8 +236,51 @@ const Question = () => {
     }
   };
 
-  const generateSaynoMessage = () => {
-    console.log('api 호출');
+  const generateSaynoMessage = async () => {
+    setIsLoading(true);
+
+    const refuseBody = {
+      situationCategory: formData.category,
+      subSituationCategory: formData.subCategory,
+      request: formData.requestDetails,
+      targetSex: formData.gender,
+      targetAge: formData.age,
+      refuseReason: formData.reason ? formData.reason.text : '',
+      narration: formData.style,
+      polite: formData.polite,
+    };
+
+    const emotionBody = {
+      situationCategory: formData.category,
+      subSituationCategory: formData.subCategory,
+      request: formData.requestDetails,
+      targetSex: formData.gender,
+      targetAge: formData.age,
+    };
+
+    try {
+      const response1 = await axios.post(`${import.meta.env.VITE_API_URL}/refuse/register`, refuseBody, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const refuseId = response1?.data?.data;
+
+      const response2 = await axios.post(`${import.meta.env.VITE_API_URL}/emotion-and-intent/register`, emotionBody, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const emotionId = response2?.data?.data;
+
+      navigate(`/result?refuse_id=${refuseId}&emotion_id=${emotionId}`);
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -246,6 +289,7 @@ const Question = () => {
 
   return (
     <div>
+      {isLoading ? <Loading /> : null}
       <Header onBackClick={step === 1 ? handleStepOneBack : handleBack} />
       <ProgressBar step={step} stepText={getStepString(step)} totalSteps={totalStep} />
       {step === 1 && !isDepthQuestionShow ? (

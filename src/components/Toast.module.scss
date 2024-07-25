@@ -20,7 +20,7 @@
 }
 
 .toastWrapper {
-  position: absolute;
+  position: fixed;
   left: 50%;
   transform: translateX(-50%);
   top: auto;

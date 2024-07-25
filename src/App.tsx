@@ -20,10 +20,6 @@ const router = createBrowserRouter([
         element: <Question />,
       },
       {
-        path: '/loading',
-        element: <Loading />,
-      },
-      {
         path: '/result',
         element: <Result />,
       },

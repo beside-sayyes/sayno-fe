@@ -26,7 +26,6 @@ npm run dev
 
 * Web
     * [Axios](https://axios-http.com/) - [MIT](https://github.com/axios/axios-docs/blob/master/LICENSE)
-    * [UAParser.js](https://opencollective.com/ua-parser-js/) - [AGPL-3.0](https://github.com/faisalman/ua-parser-js?tab=AGPL-3.0-1-ov-file#readme)
 
 ## DEPLOY
 ```
