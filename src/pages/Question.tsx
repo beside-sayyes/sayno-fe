@@ -14,7 +14,7 @@ interface FormData {
   requestDetails: string | null;
   gender: string | null;
   age: string | null;
-  reason: { id: number; text: string } | null;
+  reason: { id: number; text: string | null } | null;
   style: string | null;
   polite: string | null;
 }
@@ -224,6 +224,11 @@ const Question = () => {
           return {
             ...prevFormData,
             reason: { ...selectedReason, text: '' },
+          };
+        } else if (selectedReason && selectedReason.id === 4) {
+          return {
+            ...prevFormData,
+            reason: { ...selectedReason, text: null }, // '세이노가 알아서 해줘' 선택 시 null 처리
           };
         } else {
           return {
