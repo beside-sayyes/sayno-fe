@@ -15,12 +15,23 @@ const Result = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isEmotionLoading, setIsEmotionLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [randomTip, setRandomTip] = useState('');
+
   const rejectCommentRef = useRef<HTMLParagraphElement>(null);
 
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const refuseId = queryParams.get('refuse_id');
   const emotionId = queryParams.get('emotion_id');
+
+  const tips = [
+    '상대방의 감정을 이해한다고 말해보세요.',
+    '거절 멘트를 미리 연습해보세요.',
+    '단호하게, 그러나 친절하게 말하세요.',
+    '사실대로 말하는 것이 가장 좋습니다.',
+    '차분하고 안정된 목소리로 말하세요.',
+    '다른 가능성을 제시해보세요.',
+  ];
 
   const handleUrlCopyClipBoard = async (text: string) => {
     try {
@@ -114,28 +125,14 @@ const Result = () => {
     if (emotionIdNumber) {
       fetchEmotionAndIntent(emotionIdNumber);
     }
+
+    setRandomTip(tips[Math.floor(Math.random() * tips.length)]);
   }, [refuseId, emotionId]);
 
   return (
     <div>
       <ResultHeader />
       <div>
-        {/* 결과 박스 */}
-        <div className={styles.resultItemWrapper}>
-          <div className={styles.resultItemTitleWrapper}>
-            <div className={styles.imgWrapper}>
-              <img src='/images/icon_cmark.png' alt='mark image' className={styles.img} />
-            </div>
-            <h2 className={styles.title}>
-              세이노는 상황을 <br />
-              이렇게 해석했어요
-            </h2>
-          </div>
-          <div className={styles.descriptionWrapper}>
-            {isEmotionLoading ? <LoadingSpinner /> : null}
-            <p className={styles.description}>{emotionAndIntentText}</p>
-          </div>
-        </div>
         {/* 결과 박스 */}
         <div className={styles.resultItemWrapper}>
           <div className={styles.resultItemTitleWrapper}>
@@ -216,6 +213,22 @@ const Result = () => {
             </div>
           ) : null}
         </div>
+        {/* 결과 박스 */}
+        <div className={styles.resultItemWrapper}>
+          <div className={styles.resultItemTitleWrapper}>
+            <div className={styles.imgWrapper}>
+              <img src='/images/icon_cmark.png' alt='mark image' className={styles.img} />
+            </div>
+            <h2 className={styles.title}>
+              세이노는 상황을 <br />
+              이렇게 해석했어요
+            </h2>
+          </div>
+          <div className={styles.descriptionWrapper}>
+            {isEmotionLoading ? <LoadingSpinner /> : null}
+            <p className={styles.description}>{emotionAndIntentText}</p>
+          </div>
+        </div>
         {/* 꿀팁 */}
         <div className={styles.tipItemWrapper}>
           <div className={styles.tipItemTitleWrapper}>
@@ -224,11 +237,7 @@ const Result = () => {
             </div>
             <h2 className={styles.tipTitle}>대면 거절시 꿀팁</h2>
           </div>
-          <p className={styles.tipDescription}>
-            "와, 부케를 나한테 주다니 정말 고마워! 하지만 난 아직 마음의 준비가 안 됐나 봐. 부케를 받으면 3개월 안에
-            결혼해야 한다는 말이 있잖아? 나 아직 연애도 시작 못했는데! 다른 친구에게 기회를 주는 게 어떨까? 그래도
-            초대해줘서 정말 고마워, 멋진 결혼식 기대할게!"
-          </p>
+          <p className={styles.tipDescription}>{randomTip}</p>
         </div>
       </div>
       {/* 추천해주세요 */}

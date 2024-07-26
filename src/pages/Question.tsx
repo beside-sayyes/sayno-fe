@@ -123,6 +123,7 @@ const Question = () => {
       !isDepthQuestionShow
     ) {
       setIsDepthQuestionShow(true);
+      window.scrollTo(0, 0);
     } else if (isDepthQuestionShow) {
       if (formData.subCategory === null) {
         alert('추가 상황을 입력해주세요');
@@ -190,6 +191,7 @@ const Question = () => {
   const handleStepOneBack = () => {
     if (isDepthQuestionShow) {
       setIsDepthQuestionShow(false);
+      window.scrollTo(0, 0);
     } else {
       navigate('/');
     }
@@ -294,6 +296,10 @@ const Question = () => {
     setIsNextDisabled(validateStep(step));
   }, [formData, step, isDepthQuestionShow]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [step]);
+
   return (
     <div>
       {isLoading ? <Loading /> : null}
@@ -320,7 +326,7 @@ const Question = () => {
             <>
               <span className='highlight'>{formData.category}</span>
               {getParticle(formData.category)} 선택하셨네요! <br />
-              어떤 상황이셨어요?
+              어떤 상황이었나요?
             </>
           }
           options={subCategoryOptions[formData.category] || []}
