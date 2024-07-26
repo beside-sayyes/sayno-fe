@@ -210,9 +210,27 @@ const Question = () => {
           ...prevFormData,
           [name]: value,
           subCategory: null, // category 변경 시 subCategory를 null로 설정
+          requestDetails: null, // category 변경 시 requestDetails를 null로 설정
+        };
+      } else if (name === 'subCategory') {
+        return {
+          ...prevFormData,
+          [name]: value,
+          requestDetails: null, // subCategory 변경 시 requestDetails를 null로 설정
         };
       } else if (name === 'reason') {
         const selectedReason = reasonOptions.find((reason) => reason.id === Number(value));
+        if (selectedReason && selectedReason.id === 1) {
+          return {
+            ...prevFormData,
+            reason: { ...selectedReason, text: '' },
+          };
+        } else {
+          return {
+            ...prevFormData,
+            reason: selectedReason || null,
+          };
+        }
         return {
           ...prevFormData,
           reason: selectedReason || null,
@@ -299,6 +317,8 @@ const Question = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [step]);
+
+  console.log('formData', formData);
 
   return (
     <div>
