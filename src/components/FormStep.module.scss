@@ -141,4 +141,18 @@
       border: 1px solid #B6B6B6;
     }
   }
+
+  .countTextWrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 2px;
+    padding-right: 1px;
+  }
+
+  .countText {
+    font-size: 12px;
+    font-weight: 400;
+    color: #fff;
+  }
 }
