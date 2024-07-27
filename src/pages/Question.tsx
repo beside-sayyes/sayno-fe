@@ -7,21 +7,9 @@ import FixedBottomButtonWrapper from '../components/FixedBottomButtonWrapper.tsx
 import BottomSheet from '../components/BottomSheet.tsx';
 import axios from 'axios';
 import Loading from '../components/Loading.tsx';
-
-interface FormData {
-  category: string | null;
-  subCategory: string | null;
-  requestDetails: string | null;
-  gender: string | null;
-  age: string | null;
-  reason: { id: number; text: string | null } | null;
-  style: string | null;
-  polite: string | null;
-}
-
-interface SubCategoryOptions {
-  [key: string]: string[];
-}
+import RADIO_OPTIONS from '../constants/radioOptions.ts';
+import { getParticle } from '../utils/utils.ts';
+import { FormData } from '../types/types.ts';
 
 const Question = () => {
   const [step, setStep] = useState(1);
@@ -39,48 +27,9 @@ const Question = () => {
     polite: null,
   });
   const [isNextDisabled, setIsNextDisabled] = useState(true);
+  const totalStep = 6;
 
   const navigate = useNavigate();
-
-  const totalStep = 6;
-  const categoryOptions = ['돈', '약속', '학교', '회사', '결혼', '기타'];
-  const subCategoryOptions: SubCategoryOptions = {
-    돈: [],
-    약속: [],
-    학교: ['과제', '기타'],
-    회사: ['회식', '업무', '기타'],
-    결혼: ['청첩장 모임', '결혼식 참여', '축가 및 축사', '결혼기념일', '기타'],
-    기타: [],
-  };
-  const genderOptions = ['남자', '여자'];
-  const ageOptions = ['10대', '20대', '30대', '40대', '50대'];
-  const reasonOptions = [
-    {
-      id: 1,
-      text: '직접 입력',
-    },
-    {
-      id: 2,
-      text: '일정이 안돼서',
-    },
-    {
-      id: 3,
-      text: '돈이 없어서',
-    },
-    {
-      id: 4,
-      text: '세이노가 알아서 해줘',
-    },
-  ];
-  const styleOptions = ['다정하게', '직구로', '유머러스하게'];
-  const politeOptions = ['존댓말 사용', '반말 사용'];
-
-  const getParticle = (word: string) => {
-    if (!word) return '';
-    const lastChar = word.charCodeAt(word.length - 1);
-    const hasBatchim = (lastChar - 0xac00) % 28 !== 0;
-    return hasBatchim ? '을' : '를';
-  };
 
   const getStepString = (step: number) => {
     switch (step) {
@@ -115,10 +64,10 @@ const Question = () => {
       return;
     }
 
-    if (subCategoryOptions[formData.category]?.length === 0) {
+    if (RADIO_OPTIONS.SUB_CATEGORY_OPTIONS[formData.category]?.length === 0) {
       setIsBottomSheetShow(true);
     } else if (
-      subCategoryOptions[formData.category]?.length > 0 &&
+      RADIO_OPTIONS.SUB_CATEGORY_OPTIONS[formData.category]?.length > 0 &&
       formData.subCategory === null &&
       !isDepthQuestionShow
     ) {
@@ -219,7 +168,7 @@ const Question = () => {
           requestDetails: null, // subCategory 변경 시 requestDetails를 null로 설정
         };
       } else if (name === 'reason') {
-        const selectedReason = reasonOptions.find((reason) => reason.id === Number(value));
+        const selectedReason = RADIO_OPTIONS.REASON_OPTIONS.find((reason) => reason.id === Number(value));
         if (selectedReason && selectedReason.id === 1) {
           return {
             ...prevFormData,
@@ -323,8 +272,6 @@ const Question = () => {
     window.scrollTo(0, 0);
   }, [step]);
 
-  console.log('formData', formData);
-
   return (
     <div>
       {isLoading ? <Loading /> : null}
@@ -338,7 +285,7 @@ const Question = () => {
               상황을 선택해주세요!
             </>
           }
-          options={categoryOptions}
+          options={RADIO_OPTIONS.CATEGORY_OPTIONS}
           name='category'
           value={formData.category}
           onChange={handleChange}
@@ -354,7 +301,7 @@ const Question = () => {
               어떤 상황이었나요?
             </>
           }
-          options={subCategoryOptions[formData.category] || []}
+          options={RADIO_OPTIONS.SUB_CATEGORY_OPTIONS[formData.category] || []}
           name='subCategory'
           value={formData.subCategory}
           onChange={handleChange}
@@ -381,7 +328,7 @@ const Question = () => {
             </>
           }
           description={'요청자의 성별에 따라 호칭이 달라질 수 있어요'}
-          options={genderOptions}
+          options={RADIO_OPTIONS.GENDER_OPTIONS}
           name='gender'
           value={formData.gender}
           onChange={handleChange}
@@ -396,7 +343,7 @@ const Question = () => {
             </>
           }
           description={'요청자의 연령대에 맞는 멘트를 생성해드려요'}
-          options={ageOptions}
+          options={RADIO_OPTIONS.AGE_OPTIONS}
           name='age'
           value={formData.age}
           onChange={handleChange}
@@ -410,7 +357,7 @@ const Question = () => {
               무엇인가요?
             </>
           }
-          options={reasonOptions}
+          options={RADIO_OPTIONS.REASON_OPTIONS}
           name='reason'
           value={formData.reason}
           onChange={handleChange}
@@ -425,7 +372,7 @@ const Question = () => {
               거절하시겠어요?
             </>
           }
-          options={styleOptions}
+          options={RADIO_OPTIONS.STYLE_OPTIONS}
           name='style'
           value={formData.style}
           onChange={handleChange}
@@ -440,7 +387,7 @@ const Question = () => {
             </>
           }
           bubbleText={'이제 다 왔어요!'}
-          options={politeOptions}
+          options={RADIO_OPTIONS.POLITE_OPTIONS}
           name='polite'
           value={formData.polite}
           onChange={handleChange}

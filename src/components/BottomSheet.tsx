@@ -1,17 +1,7 @@
 import styles from './BottomSheet.module.scss';
 import PrimaryButton from './PrimaryButton.tsx';
 import { useEffect, useRef } from 'react';
-
-interface FormData {
-  category: string | null;
-  subCategory: string | null;
-  requestDetails: string | null;
-  gender: string | null;
-  age: string | null;
-  reason: { id: number; text: string } | null;
-  style: string | null;
-  polite: string | null;
-}
+import { FormData } from '../types/types.ts';
 
 interface BottomSheetProps {
   isShow: boolean;
