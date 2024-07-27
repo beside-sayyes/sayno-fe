@@ -28,6 +28,8 @@ const FormStep = ({
   onReasonTextChange,
   iconStyle = false,
 }: FormStepProps) => {
+  const maxLength = 500;
+
   return (
     <div>
       <div className={styles.textWrapper}>
@@ -68,13 +70,20 @@ const FormStep = ({
                 <span className={styles.labelText}>{optionText}</span>
               </label>
               {isObject && optionValue === 1 && isChecked && (
-                <textarea
-                  maxLength={500}
-                  className={styles.textarea}
-                  value={typeof value === 'object' && value && value.id === 1 ? value.text : ''}
-                  onChange={onReasonTextChange}
-                  placeholder='500자 이내로 입력해주세요~'
-                />
+                <>
+                  <textarea
+                    maxLength={maxLength}
+                    className={styles.textarea}
+                    value={typeof value === 'object' && value && value.id === 1 ? value.text : ''}
+                    onChange={onReasonTextChange}
+                    placeholder='500자 이내로 입력해주세요~'
+                  />
+                  <div className={styles.countTextWrapper}>
+                    <span className={styles.countText}>
+                      {typeof value === 'object' && value && value.id === 1 ? value?.text?.length : '0'}/{maxLength}
+                    </span>
+                  </div>
+                </>
               )}
             </div>
           );

@@ -15,6 +15,7 @@ interface BottomSheetProps {
 
 const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, formData, setFormData }: BottomSheetProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const maxLength = 500;
 
   const handleTextareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
@@ -44,9 +45,9 @@ const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, formData, set
             </div>
           </button>
         </div>
-        <div>
+        <div className={styles.textareaWrapper}>
           <textarea
-            maxLength={500}
+            maxLength={maxLength}
             ref={textareaRef}
             name='requestDetails'
             id='requestDetails'
@@ -55,6 +56,11 @@ const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, formData, set
             onChange={handleTextareaChange}
             placeholder={''}
           />
+          <div className={styles.countTextWrapper}>
+            <span className={styles.countText}>
+              {formData?.requestDetails?.length}/{maxLength}
+            </span>
+          </div>
         </div>
         <PrimaryButton buttonText={'다음'} onClick={onClick} disabled={!formData.requestDetails} />
       </div>
