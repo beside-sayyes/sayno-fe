@@ -6,10 +6,15 @@ interface PrimaryButtonProps {
   disabled?: boolean;
 }
 
-const PrimaryButton = ({ buttonText, onClick, disabled }: PrimaryButtonProps) => {
+const PrimaryButton = ({ buttonText, onClick, disabled = false }: PrimaryButtonProps) => {
   return (
     <div>
-      <button className={`default-input ${styles.button}`} onClick={onClick} disabled={disabled}>
+      <button
+        className={`default-input ${styles.button}`}
+        onClick={onClick}
+        disabled={disabled}
+        aria-label={buttonText}
+      >
         {buttonText}
       </button>
     </div>

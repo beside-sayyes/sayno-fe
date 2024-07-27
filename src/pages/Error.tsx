@@ -2,7 +2,7 @@ import styles from './Error.module.scss';
 import { useNavigate } from 'react-router-dom';
 import FixedBottomButtonWrapper from '../components/FixedBottomButtonWrapper.tsx';
 
-const Home = () => {
+const Error = () => {
   const navigate = useNavigate();
 
   const moveHome = () => {
@@ -23,4 +23,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Error;

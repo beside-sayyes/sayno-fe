@@ -8,3 +8,8 @@ export interface FormData {
   style: string | null;
   polite: string | null;
 }
+
+export interface OptionObject {
+  id: number;
+  text: string;
+}
