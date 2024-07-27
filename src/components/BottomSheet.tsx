@@ -58,7 +58,7 @@ const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, formData, set
           />
           <div className={styles.countTextWrapper}>
             <span className={styles.countText}>
-              {formData?.requestDetails?.length}/{maxLength}
+              {formData?.requestDetails ? formData?.requestDetails?.length : '0'}/{maxLength}
             </span>
           </div>
         </div>
