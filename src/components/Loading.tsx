@@ -1,18 +1,6 @@
-// import { useNavigate } from 'react-router-dom';
-// import { useEffect } from 'react';
 import styles from './Loading.module.scss';
 
 const Loading = () => {
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     navigate('/result');
-  //   }, 2000);
-  //
-  //   return () => clearTimeout(timer);
-  // }, []);
-
   return (
     <div className={styles.layout}>
       <div className={styles.inner}>
