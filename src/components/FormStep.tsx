@@ -1,9 +1,5 @@
 import styles from './FormStep.module.scss';
-
-interface OptionObject {
-  id: number;
-  text: string;
-}
+import { OptionObject } from '../types/types.ts';
 
 interface FormStepProps {
   question: string | React.ReactNode;
@@ -11,7 +7,7 @@ interface FormStepProps {
   description?: string;
   options: string[] | OptionObject[];
   name: string;
-  value: string | { id: number; text: string } | null;
+  value: string | OptionObject | null;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onReasonTextChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   iconStyle?: boolean;

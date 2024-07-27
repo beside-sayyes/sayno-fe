@@ -1,10 +1,5 @@
 const RADIO_OPTIONS = {
-  // const categoryOptions = ['돈', '약속', '학교', '회사', '결혼', '기타'];
   CATEGORY_OPTIONS: ['돈', '약속', '학교', '회사', '결혼', '기타'],
-  // subCategoryOptions
-  // genderOptions
-  // ageOptions
-  // reasonOptions
   SUB_CATEGORY_OPTIONS: {
     돈: [],
     약속: [],

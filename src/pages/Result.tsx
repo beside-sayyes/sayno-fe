@@ -33,14 +33,17 @@ const Result = () => {
     '다른 가능성을 제시해보세요.',
   ];
 
+  const showToast = (message: string) => {
+    setToastMessage(message);
+    setIsShowToast(true);
+  };
+
   const handleUrlCopyClipBoard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      setToastMessage('서비스 링크가 복사되었어요!');
-      setIsShowToast(true);
+      showToast('서비스 링크가 복사되었어요!');
     } catch (error) {
-      setToastMessage('복사에 실패하였습니다.');
-      setIsShowToast(true);
+      showToast('복사에 실패하였습니다.');
       console.log(error);
     }
   };
@@ -49,11 +52,9 @@ const Result = () => {
     if (rejectCommentRef.current) {
       try {
         await navigator.clipboard.writeText(rejectCommentRef.current.textContent || '');
-        setToastMessage('거절 멘트가 복사되었어요!');
-        setIsShowToast(true);
+        showToast('거절 멘트가 복사되었어요!');
       } catch (error) {
-        setToastMessage('복사에 실패하였습니다.');
-        setIsShowToast(true);
+        showToast('복사에 실패하였습니다.');
         console.log(error);
       }
     }
@@ -104,8 +105,7 @@ const Result = () => {
           'Content-Type': 'application/json',
         },
       });
-      const data = response?.data?.data;
-      const newRefuseId = data;
+      const newRefuseId = response?.data?.data;
       navigate(`/result?refuse_id=${newRefuseId}&emotion_id=${emotionId}`);
     } catch (error) {
       console.log(error);
@@ -162,6 +162,7 @@ const Result = () => {
                   type={'button'}
                   className={`default-input ${styles.editButton}`}
                   disabled={isLoading}
+                  aria-label={'수정하기'}
                   onClick={() => {
                     setIsEditing(true);
                   }}
@@ -175,6 +176,7 @@ const Result = () => {
                   type={'button'}
                   className={`default-input ${styles.copyButton}`}
                   onClick={handleRejectCommentCopyClipBoard}
+                  aria-label={'복사하기'}
                   disabled={isLoading}
                 >
                   <div className={styles.buttonIconWrapper}>
@@ -188,6 +190,7 @@ const Result = () => {
                   type={'button'}
                   className={`default-input ${styles.retryButton}`}
                   disabled={isLoading}
+                  aria-label={'다시 만들래'}
                   onClick={() => {
                     reRegisterRefuseMessage(Number(refuseId));
                   }}
@@ -203,6 +206,7 @@ const Result = () => {
               <button
                 type={'button'}
                 className={`default-input ${styles.copyButton} ${styles.typeFull}`}
+                aria-label={'수정완료'}
                 onClick={() => {
                   setIsEditing(false);
                   setRefuseMessage(rejectCommentRef.current?.innerText || '');
@@ -249,7 +253,7 @@ const Result = () => {
         <button
           className={`default-input ${styles.recommendationButton}`}
           type={'button'}
-          aria-label={'공유링크 복사'}
+          aria-label={'추천하기'}
           onClick={() => handleUrlCopyClipBoard('https://justsayno.netlify.app')}
         >
           <div className={styles.iconWrapper}>

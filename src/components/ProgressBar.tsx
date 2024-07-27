@@ -18,7 +18,7 @@ const ProgressBar = ({ step, stepText, totalSteps }: ProgressBarProps) => {
         </div>
         <div className={styles.progressBar}>
           {Array.from({ length: totalSteps }, (_, index) => (
-            <div key={index} className={`${styles.progressSegment} ${index < step ? styles['filled'] : ''}`} />
+            <div key={index} className={`${styles.progressSegment} ${index < step ? styles.filled : ''}`} />
           ))}
         </div>
       </div>
