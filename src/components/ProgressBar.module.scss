@@ -40,16 +40,30 @@
 }
 
 .progressSegment {
+  overflow: hidden;
+  position: relative;
   flex: 1;
-
   margin: 0 4px; // 개별바 사이 마진
   background-color: #3D3D3D;
-  transition: background-color 0.3s;
   border-radius: 4px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: #7122F2;
+    transition: width 0.3s;
+  }
 }
 
 .progressSegment.filled {
-  background-color: #7122F2;
+
+  &:before {
+    width: 100%;
+  }
 }
 
 .progressSegment:first-child {
