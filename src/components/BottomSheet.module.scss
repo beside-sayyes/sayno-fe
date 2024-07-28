@@ -88,6 +88,11 @@
   background-color: #232323;
   color: #fff;
   line-height: 1.4;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #B6B6B6;
+  }
 }
 
 .countTextWrapper {
