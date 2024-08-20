@@ -1,8 +1,6 @@
-import ProgressBar from '../components/ProgressBar.tsx';
 import Header from '../components/Header.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import FormStep from '../components/FormStep.tsx';
 import FixedBottomButtonWrapper from '../components/FixedBottomButtonWrapper.tsx';
 import BottomSheet from '../components/BottomSheet.tsx';
 import axios from 'axios';
@@ -11,6 +9,7 @@ import RADIO_OPTIONS from '../constants/radioOptions.ts';
 import { getParticle } from '../utils/utils.ts';
 import { FormData } from '../types/types.ts';
 import ProgressStepper from '../components/ProgressStepper.tsx';
+import FormStepV2 from '../components/FormStepV2.tsx';
 
 const Question = () => {
   const [step, setStep] = useState(1);
@@ -31,25 +30,6 @@ const Question = () => {
   const totalStep = 3;
 
   const navigate = useNavigate();
-
-  const getStepString = (step: number) => {
-    switch (step) {
-      case 1:
-        return '부탁 정보 입력';
-      case 2:
-        return '성별 입력';
-      case 3:
-        return '나이 입력';
-      case 4:
-        return '거절 사유 입력';
-      case 5:
-        return '화법 설정';
-      case 6:
-        return '존댓말 사용 여부';
-      default:
-        return '';
-    }
-  };
 
   const handleReasonTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
@@ -277,10 +257,9 @@ const Question = () => {
     <div>
       {isLoading ? <Loading /> : null}
       <Header onBackClick={step === 1 ? handleStepOneBack : handleBack} />
-      <ProgressStepper totalSteps={3} step={1} />
-      {/*<ProgressBar step={step} stepText={getStepString(step)} totalSteps={totalStep} />*/}
+      <ProgressStepper totalSteps={totalStep} step={step} />
       {step === 1 && !isDepthQuestionShow ? (
-        <FormStep
+        <FormStepV2
           question={
             <>
               요청 받으신 <br />
@@ -295,7 +274,7 @@ const Question = () => {
         />
       ) : null}
       {step === 1 && isDepthQuestionShow && formData.category ? (
-        <FormStep
+        <FormStepV2
           question={
             <>
               <span className='highlight'>{formData.category}</span>
@@ -322,7 +301,7 @@ const Question = () => {
         />
       ) : null}
       {step === 2 ? (
-        <FormStep
+        <FormStepV2
           question={
             <>
               상대방의 <br />
@@ -337,7 +316,7 @@ const Question = () => {
         />
       ) : null}
       {step === 3 ? (
-        <FormStep
+        <FormStepV2
           question={
             <>
               상대방의 <br />
@@ -352,7 +331,7 @@ const Question = () => {
         />
       ) : null}
       {step === 4 ? (
-        <FormStep
+        <FormStepV2
           question={
             <>
               거절하시는 이유는 <br />
@@ -367,7 +346,7 @@ const Question = () => {
         />
       ) : null}
       {step === 5 ? (
-        <FormStep
+        <FormStepV2
           question={
             <>
               어떤 화법으로 <br />
@@ -381,7 +360,7 @@ const Question = () => {
         />
       ) : null}
       {step === 6 ? (
-        <FormStep
+        <FormStepV2
           question={
             <>
               존댓말을 <br />

@@ -1,3 +1,5 @@
+import styles from './ProgressStepper.module.scss';
+
 interface ProgressStepperProps {
   totalSteps: number;
   step: number;
@@ -5,42 +7,21 @@ interface ProgressStepperProps {
 
 const ProgressStepper = ({ totalSteps, step }: ProgressStepperProps) => {
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
+    <div className={styles.ProgressStepperWrapper}>
       {Array.from({ length: totalSteps }).map((_, index) => {
-        const isCompleted = index + 1 < step;
-        const isActive = index + 1 === step;
+        const isCompleted = index + 1 < step; // 지난 단계
+        const isActive = index + 1 === step; // 현재 액티브
         return (
-          <div
-            key={index}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <div
-              style={{
-                width: 30,
-                height: 30,
-                borderRadius: '50%',
-                backgroundColor: isCompleted || isActive ? '#8A2BE2' : '#333',
-                color: '#fff',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                fontSize: '16px',
-              }}
-            >
+          <div className={styles.stepWrapper}>
+            <span key={index} className={`${styles.step} ${isCompleted || isActive ? styles.activeStep : ''}`}>
               {index + 1}
-            </div>
+            </span>
             {index < totalSteps - 1 && (
-              <div
-                style={{
-                  width: 40,
-                  height: 2,
-                  backgroundColor: isCompleted ? '#8A2BE2' : '#333',
-                  margin: '0 10px',
-                }}
-              ></div>
+              <div className={`${styles.line} ${isCompleted ? styles.activeLine : ''}`}>
+                {Array.from({ length: 4 }).map((_, index) => {
+                  return <span key={index} className={styles.stepLineDot} />;
+                })}
+              </div>
             )}
           </div>
         );

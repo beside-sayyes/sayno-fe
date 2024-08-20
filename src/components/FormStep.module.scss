@@ -156,3 +156,14 @@
     color: #fff;
   }
 }
+
+// V2
+.formStep {
+
+  &.typeV2 {
+
+    .textWrapper {
+      margin-top: 16px;
+    }
+  }
+}
