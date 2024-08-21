@@ -165,5 +165,21 @@
     .textWrapper {
       margin-top: 16px;
     }
+
+    .customIconFormWrapper {
+      display: block;
+
+      .customLabelWrapper {
+        width: auto;
+      }
+
+      .label {
+        border: 3px solid blue;
+        display: flex;
+        flex-direction: row-reverse;
+      }
+    }
+
+
   }
 }

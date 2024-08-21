@@ -12,7 +12,7 @@ const ProgressStepper = ({ totalSteps, step }: ProgressStepperProps) => {
         const isCompleted = index + 1 < step; // 지난 단계
         const isActive = index + 1 === step; // 현재 액티브
         return (
-          <div className={styles.stepWrapper}>
+          <div key={index} className={styles.stepWrapper}>
             <span key={index} className={`${styles.step} ${isCompleted || isActive ? styles.activeStep : ''}`}>
               {index + 1}
             </span>

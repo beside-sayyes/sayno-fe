@@ -5,7 +5,7 @@ import FixedBottomButtonWrapper from '../components/FixedBottomButtonWrapper.tsx
 import BottomSheet from '../components/BottomSheet.tsx';
 import axios from 'axios';
 import Loading from '../components/Loading.tsx';
-import RADIO_OPTIONS from '../constants/radioOptions.ts';
+import RADIO_OPTIONS_V2 from '../constants/radioOptionsV2.ts';
 import { getParticle } from '../utils/utils.ts';
 import { FormData } from '../types/types.ts';
 import ProgressStepper from '../components/ProgressStepper.tsx';
@@ -45,10 +45,10 @@ const Question = () => {
       return;
     }
 
-    if (RADIO_OPTIONS.SUB_CATEGORY_OPTIONS[formData.category]?.length === 0) {
+    if (RADIO_OPTIONS_V2.SUB_CATEGORY_OPTIONS[formData.category]?.length === 0) {
       setIsBottomSheetShow(true);
     } else if (
-      RADIO_OPTIONS.SUB_CATEGORY_OPTIONS[formData.category]?.length > 0 &&
+      RADIO_OPTIONS_V2.SUB_CATEGORY_OPTIONS[formData.category]?.length > 0 &&
       formData.subCategory === null &&
       !isDepthQuestionShow
     ) {
@@ -149,7 +149,7 @@ const Question = () => {
           requestDetails: null, // subCategory 변경 시 requestDetails를 null로 설정
         };
       } else if (name === 'reason') {
-        const selectedReason = RADIO_OPTIONS.REASON_OPTIONS.find((reason) => reason.id === Number(value));
+        const selectedReason = RADIO_OPTIONS_V2.REASON_OPTIONS.find((reason) => reason.id === Number(value));
         if (selectedReason && selectedReason.id === 1) {
           return {
             ...prevFormData,
@@ -253,6 +253,8 @@ const Question = () => {
     window.scrollTo(0, 0);
   }, [step]);
 
+  console.log('formData', formData);
+
   return (
     <div>
       {isLoading ? <Loading /> : null}
@@ -262,11 +264,11 @@ const Question = () => {
         <FormStepV2
           question={
             <>
-              요청 받으신 <br />
-              상황을 선택해주세요!
+              반가워요! <br />
+              어떤 부탁을 받으셨나요?
             </>
           }
-          options={RADIO_OPTIONS.CATEGORY_OPTIONS}
+          options={RADIO_OPTIONS_V2.CATEGORY_OPTIONS}
           name='category'
           value={formData.category}
           onChange={handleChange}
@@ -282,7 +284,7 @@ const Question = () => {
               어떤 상황이었나요?
             </>
           }
-          options={RADIO_OPTIONS.SUB_CATEGORY_OPTIONS[formData.category] || []}
+          options={RADIO_OPTIONS_V2.SUB_CATEGORY_OPTIONS[formData.category] || []}
           name='subCategory'
           value={formData.subCategory}
           onChange={handleChange}
@@ -309,7 +311,7 @@ const Question = () => {
             </>
           }
           description={'요청자의 성별에 따라 호칭이 달라질 수 있어요'}
-          options={RADIO_OPTIONS.GENDER_OPTIONS}
+          options={RADIO_OPTIONS_V2.GENDER_OPTIONS}
           name='gender'
           value={formData.gender}
           onChange={handleChange}
@@ -324,7 +326,7 @@ const Question = () => {
             </>
           }
           description={'요청자의 연령대에 맞는 멘트를 생성해드려요'}
-          options={RADIO_OPTIONS.AGE_OPTIONS}
+          options={RADIO_OPTIONS_V2.AGE_OPTIONS}
           name='age'
           value={formData.age}
           onChange={handleChange}
@@ -338,7 +340,7 @@ const Question = () => {
               무엇인가요?
             </>
           }
-          options={RADIO_OPTIONS.REASON_OPTIONS}
+          options={RADIO_OPTIONS_V2.REASON_OPTIONS}
           name='reason'
           value={formData.reason}
           onChange={handleChange}
@@ -353,7 +355,7 @@ const Question = () => {
               거절하시겠어요?
             </>
           }
-          options={RADIO_OPTIONS.STYLE_OPTIONS}
+          options={RADIO_OPTIONS_V2.STYLE_OPTIONS}
           name='style'
           value={formData.style}
           onChange={handleChange}
@@ -368,7 +370,7 @@ const Question = () => {
             </>
           }
           bubbleText={'이제 다 왔어요!'}
-          options={RADIO_OPTIONS.POLITE_OPTIONS}
+          options={RADIO_OPTIONS_V2.POLITE_OPTIONS}
           name='polite'
           value={formData.polite}
           onChange={handleChange}
