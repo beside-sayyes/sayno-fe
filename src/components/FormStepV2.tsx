@@ -1,5 +1,6 @@
 import styles from './FormStep.module.scss';
 import { OptionObject } from '../types/types.ts';
+import RADIO_OPTIONS_V2 from '../constants/radioOptionsV2.ts';
 
 interface FormStepProps {
   question: string | React.ReactNode;
@@ -12,6 +13,7 @@ interface FormStepProps {
   onReasonTextChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   iconStyle?: boolean;
   isV2?: boolean;
+  labelType?: string;
 }
 
 const FormStepV2 = ({
@@ -25,6 +27,7 @@ const FormStepV2 = ({
   onReasonTextChange,
   iconStyle = false,
   isV2 = true,
+  labelType = 'none',
 }: FormStepProps) => {
   const maxLength = 500;
 
@@ -65,7 +68,18 @@ const FormStepV2 = ({
                   onChange={onChange}
                   style={{ display: 'none' }}
                 />
-                <span className={styles.labelText}>{optionText}</span>
+                {labelType === 'static' ? (
+                  <span className={styles.labelText}>
+                    <span className={'highlight'}>{optionText}</span>에서 <br />
+                    부탁을 받았어요.
+                  </span>
+                ) : null}
+                {labelType === 'dynamic' ? (
+                  <span className={styles.labelText}>
+                    {RADIO_OPTIONS_V2.SUB_CATEGORY_DESC_OPTIONS[optionText]} {optionText}
+                  </span>
+                ) : null}
+                {labelType === 'none' ? <span className={styles.labelText}>{optionText}</span> : null}
               </label>
               {isObject && optionValue === 1 && isChecked && (
                 <>

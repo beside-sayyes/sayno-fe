@@ -273,6 +273,7 @@ const Question = () => {
           value={formData.category}
           onChange={handleChange}
           iconStyle={true}
+          labelType={'static'}
         />
       ) : null}
       {step === 1 && isDepthQuestionShow && formData.category ? (
@@ -288,7 +289,7 @@ const Question = () => {
           name='subCategory'
           value={formData.subCategory}
           onChange={handleChange}
-          iconStyle={true}
+          labelType={'dynamic'}
         />
       ) : null}
       {step === 1 ? (
