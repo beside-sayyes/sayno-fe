@@ -246,41 +246,42 @@
         }
 
         .label {
-          display: block;
-          width: 100%;
-          height: 40px;
-          border: 1px solid #747474;
-          border-radius: 12px;
+          height: 76px;
+          border: 1px solid #494949;
+          padding: 13px 16px;
         }
 
         .labelText {
-          width: 100%;
-          height: 100%;
-          text-align: center;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: #fff;
           font-weight: 500;
+          font-size: 18px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 5px;
+        }
+
+        .descText {
+          font-weight: 300;
+          color: #D6D6D6;
+          font-size: 14px;
         }
       }
 
-      .textarea {
-        width: 100%;
-        height: 130px;
-        border-radius: 12px;
-        padding: 12px;
-        border: 1px solid #747474;
-        background-color: #232323;
-        color: #fff;
-        line-height: 1.4;
-        margin-top: 12px;
-
-        &:focus {
-          outline: none;
-          border: 1px solid #B6B6B6;
-        }
-      }
+      //.textarea {
+      //  width: 100%;
+      //  height: 130px;
+      //  border-radius: 12px;
+      //  padding: 12px;
+      //  border: 1px solid #747474;
+      //  background-color: #232323;
+      //  color: #fff;
+      //  line-height: 1.4;
+      //  margin-top: 12px;
+      //
+      //  &:focus {
+      //    outline: none;
+      //    border: 1px solid #B6B6B6;
+      //  }
+      //}
 
       .countTextWrapper {
         display: flex;

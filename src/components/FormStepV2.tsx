@@ -76,7 +76,8 @@ const FormStepV2 = ({
                 ) : null}
                 {labelType === 'dynamic' ? (
                   <span className={styles.labelText}>
-                    {RADIO_OPTIONS_V2.SUB_CATEGORY_DESC_OPTIONS[optionText]} {optionText}
+                    <span className={styles.descText}>{RADIO_OPTIONS_V2.SUB_CATEGORY_DESC_OPTIONS[optionText]}</span>
+                    {optionText}
                   </span>
                 ) : null}
                 {labelType === 'none' ? <span className={styles.labelText}>{optionText}</span> : null}
