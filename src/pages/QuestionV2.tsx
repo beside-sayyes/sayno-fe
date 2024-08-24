@@ -15,7 +15,7 @@ const Question = () => {
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isDepthQuestionShow, setIsDepthQuestionShow] = useState(false);
-  const [isBottomSheetShow, setIsBottomSheetShow] = useState(false);
+  // const [isBottomSheetShow, setIsBottomSheetShow] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     category: null,
     subCategory: null,
@@ -45,9 +45,7 @@ const Question = () => {
       return;
     }
 
-    if (RADIO_OPTIONS_V2.SUB_CATEGORY_OPTIONS[formData.category]?.length === 0) {
-      setIsBottomSheetShow(true);
-    } else if (
+    if (
       RADIO_OPTIONS_V2.SUB_CATEGORY_OPTIONS[formData.category]?.length > 0 &&
       formData.subCategory === null &&
       !isDepthQuestionShow
@@ -57,16 +55,15 @@ const Question = () => {
     } else if (isDepthQuestionShow) {
       if (formData.subCategory === null) {
         alert('추가 상황을 입력해주세요');
-        return;
       }
-      setIsBottomSheetShow(true);
     }
+    setStep(step + 1);
   };
 
   const handleNext = () => {
     if (step === 2) {
-      if (formData.gender === null) {
-        alert('성별을 선택해주세요');
+      if (!formData.subCategory) {
+        alert('자세한 요청 사항을 적어주세요');
         return;
       }
     }
@@ -105,18 +102,18 @@ const Question = () => {
     setStep(step + 1);
   };
 
-  const onClose = () => {
-    setIsBottomSheetShow(false);
-  };
+  // const onClose = () => {
+  //   setIsBottomSheetShow(false);
+  // };
 
-  const goStepTwo = () => {
-    if (!formData.requestDetails) {
-      alert('자세한 요청 사항을 적어주세요');
-      return;
-    }
-
-    setStep(2);
-  };
+  // const goStepTwo = () => {
+  //   if (!formData.requestDetails) {
+  //     alert('자세한 요청 사항을 적어주세요');
+  //     return;
+  //   }
+  //
+  //   setStep(2);
+  // };
 
   const handleStepOneBack = () => {
     if (isDepthQuestionShow) {
@@ -254,6 +251,7 @@ const Question = () => {
   }, [step]);
 
   console.log('formData', formData);
+  console.log('step', step);
 
   return (
     <div>
@@ -292,17 +290,17 @@ const Question = () => {
           labelType={'dynamic'}
         />
       ) : null}
-      {step === 1 ? (
-        <BottomSheet
-          bottomSheetTitle={'어떤 요청을 받으셨어요?'}
-          bottomSheetDesciption={'구체적으로 말씀해 주세요'}
-          isShow={isBottomSheetShow}
-          onClose={onClose}
-          onClick={goStepTwo}
-          formData={formData}
-          setFormData={setFormData}
-        />
-      ) : null}
+      {/*{step === 1 ? (*/}
+      {/*  <BottomSheet*/}
+      {/*    bottomSheetTitle={'어떤 요청을 받으셨어요?'}*/}
+      {/*    bottomSheetDesciption={'구체적으로 말씀해 주세요'}*/}
+      {/*    isShow={isBottomSheetShow}*/}
+      {/*    onClose={onClose}*/}
+      {/*    onClick={goStepTwo}*/}
+      {/*    formData={formData}*/}
+      {/*    setFormData={setFormData}*/}
+      {/*  />*/}
+      {/*) : null}*/}
       {step === 2 ? (
         <FormStepV2
           question={
