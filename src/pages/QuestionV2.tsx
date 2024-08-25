@@ -2,25 +2,25 @@ import Header from '../components/Header.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import FixedBottomButtonWrapper from '../components/FixedBottomButtonWrapper.tsx';
-import BottomSheet from '../components/BottomSheet.tsx';
 import axios from 'axios';
 import Loading from '../components/Loading.tsx';
 import RADIO_OPTIONS_V2 from '../constants/radioOptionsV2.ts';
 import { getParticle } from '../utils/utils.ts';
-import { FormData } from '../types/types.ts';
+import { FormDataV2 } from '../types/types.ts';
 import ProgressStepper from '../components/ProgressStepper.tsx';
 import FormStepV2 from '../components/FormStepV2.tsx';
+import FormStepV2T2 from '../components/FormStepV2T2.tsx';
 
 const Question = () => {
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isDepthQuestionShow, setIsDepthQuestionShow] = useState(false);
   // const [isBottomSheetShow, setIsBottomSheetShow] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<FormDataV2>({
     category: null,
     subCategory: null,
     requestDetails: null,
-    gender: null,
+    subRelationship: null,
     age: null,
     reason: null,
     style: null,
@@ -45,17 +45,14 @@ const Question = () => {
       return;
     }
 
-    if (
-      RADIO_OPTIONS_V2.SUB_CATEGORY_OPTIONS[formData.category]?.length > 0 &&
-      formData.subCategory === null &&
-      !isDepthQuestionShow
-    ) {
+    if (formData.subCategory === null && !isDepthQuestionShow) {
       setIsDepthQuestionShow(true);
-      window.scrollTo(0, 0);
-    } else if (isDepthQuestionShow) {
-      if (formData.subCategory === null) {
-        alert('추가 상황을 입력해주세요');
-      }
+      return;
+    }
+
+    if (formData.subCategory === null) {
+      alert('추가 상황을 입력해주세요');
+      return;
     }
     setStep(step + 1);
   };
@@ -181,7 +178,7 @@ const Question = () => {
       case 1:
         return !formData.category || (isDepthQuestionShow && !formData.subCategory);
       case 2:
-        return !formData.gender;
+        return !formData.subRelationship;
       case 3:
         return !formData.age;
       case 4:
@@ -202,7 +199,7 @@ const Question = () => {
       situationCategory: formData.category,
       subSituationCategory: formData.subCategory,
       request: formData.requestDetails,
-      targetSex: formData.gender,
+      subRelationship: formData.subRelationship,
       targetAge: formData.age,
       refuseReason: formData.reason ? formData.reason.text : '',
       narration: formData.style,
@@ -213,7 +210,6 @@ const Question = () => {
       situationCategory: formData.category,
       subSituationCategory: formData.subCategory,
       request: formData.requestDetails,
-      targetSex: formData.gender,
       targetAge: formData.age,
     };
 
@@ -302,17 +298,17 @@ const Question = () => {
       {/*  />*/}
       {/*) : null}*/}
       {step === 2 ? (
-        <FormStepV2
+        <FormStepV2T2
           question={
             <>
-              상대방의 <br />
-              성별을 알려주세요!
+              부탁에 대한 <br />
+              자세한 정보를 알려주세요.
             </>
           }
-          description={'요청자의 성별에 따라 호칭이 달라질 수 있어요'}
-          options={RADIO_OPTIONS_V2.GENDER_OPTIONS}
-          name='gender'
-          value={formData.gender}
+          options={RADIO_OPTIONS_V2.SUB_RELATIONSHIP_OPTIONS[formData.category] || []}
+          formData={formData}
+          name='subRelationship'
+          value={formData.subRelationship}
           onChange={handleChange}
         />
       ) : null}

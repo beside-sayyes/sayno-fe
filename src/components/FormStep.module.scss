@@ -185,7 +185,7 @@
         border-radius: 12px;
 
         &.is-selected {
-          border: 1px solid #B6B6B6;
+          border: 1px solid #fff;
           background-color: #313131;
 
           .customIconWrapper {
@@ -299,5 +299,36 @@
     }
 
 
+  }
+
+  &.type2 {
+
+    .textWrapper {
+      margin-bottom: 8px;
+    }
+
+    .beforeInfoWrapper {
+      padding: 20px;
+      background-color: #242C32;
+      border-radius: 12px;
+      margin-bottom: 48px;
+    }
+
+    .beforeInfo {
+      font-size: 16px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .subTextWrapper {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .subText {
+      font-size: 18px;
+      color: #fff;
+      font-weight: 500;
+    }
   }
 }

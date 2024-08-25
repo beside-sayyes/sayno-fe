@@ -1,10 +1,9 @@
 import styles from './FormStep.module.scss';
-import { OptionObject } from '../types/types.ts';
+import { FormDataV2, OptionObject } from '../types/types.ts';
 import RADIO_OPTIONS_V2 from '../constants/radioOptionsV2.ts';
 
-interface FormStepV2Props {
+interface FormStepV2T2Props {
   question: string | React.ReactNode;
-  bubbleText?: string;
   description?: string;
   options: string[] | OptionObject[];
   name: string;
@@ -14,11 +13,11 @@ interface FormStepV2Props {
   iconStyle?: boolean;
   isV2?: boolean;
   labelType?: string;
+  formData: FormDataV2;
 }
 
-const FormStepV2 = ({
+const FormStepV2T2 = ({
   question,
-  bubbleText,
   description,
   options,
   name,
@@ -27,18 +26,26 @@ const FormStepV2 = ({
   onReasonTextChange,
   iconStyle = false,
   isV2 = true,
+  isT2 = true,
   labelType = 'none',
-}: FormStepV2Props) => {
+  formData,
+}: FormStepV2T2Props) => {
   const maxLength = 500;
 
   return (
-    <div className={`${styles.formStep} ${isV2 ? styles.typeV2 : ''}`}>
+    <div className={`${styles.formStep} ${isV2 ? styles.typeV2 : ''} ${isT2 ? styles.type2 : ''}`}>
       <div className={styles.textWrapper}>
-        <h2 className={styles.question}>
-          {question}
-          {bubbleText && <span className={styles.bubble}>이제 다 왔어요!</span>}
-        </h2>
+        <h2 className={styles.question}>{question}</h2>
         {description && <p className={styles.description}>{description}</p>}
+      </div>
+      <div className={styles.beforeInfoWrapper}>
+        <p className={styles.beforeInfo}>
+          <span className={'highlight'}>{formData.category}</span>에서{' '}
+          <span className={'highlight'}>{formData.subCategory}</span>를 선택하셨어요.
+        </p>
+      </div>
+      <div className={styles.subTextWrapper}>
+        <p className={styles.subText}>상대방과의 관계를 선택해주세요.</p>
       </div>
       <div className={iconStyle ? styles.customIconFormWrapper : styles.customNormalWrapper}>
         {options.map((option, index) => {
@@ -106,4 +113,4 @@ const FormStepV2 = ({
   );
 };
 
-export default FormStepV2;
+export default FormStepV2T2;
