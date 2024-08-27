@@ -31,6 +31,16 @@ const Question = () => {
 
   const navigate = useNavigate();
 
+  const handleSubRelationshipChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      subRelationship: prevFormData.subRelationship
+        ? { ...prevFormData.subRelationship, text: value }
+        : { id: 1, text: value },
+    }));
+  };
+
   const handleReasonTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
     setFormData((prevFormData) => ({
@@ -163,6 +173,30 @@ const Question = () => {
         return {
           ...prevFormData,
           reason: selectedReason || null,
+        };
+      } else if (name === 'subRelationship') {
+        const selectedSubRelationship = RADIO_OPTIONS_V2.SUB_RELATIONSHIP_OPTIONS[formData.category].find(
+          (subRelationship) => subRelationship.id === Number(value),
+        );
+        if (selectedSubRelationship && selectedSubRelationship.id === 1) {
+          return {
+            ...prevFormData,
+            subRelationship: { ...selectedSubRelationship, text: '' },
+          };
+        } else {
+          return {
+            ...prevFormData,
+            subRelationship: selectedSubRelationship || null,
+          };
+        }
+        return {
+          ...prevFormData,
+          subRelationship: selectedSubRelationship || null,
+        };
+
+        return {
+          ...prevFormData,
+          subRelationship: value,
         };
       } else {
         return {
@@ -305,11 +339,12 @@ const Question = () => {
               자세한 정보를 알려주세요.
             </>
           }
-          options={RADIO_OPTIONS_V2.SUB_RELATIONSHIP_OPTIONS[formData.category] || []}
+          options={RADIO_OPTIONS_V2.SUB_RELATIONSHIP_OPTIONS[formData.category]}
           formData={formData}
           name='subRelationship'
           value={formData.subRelationship}
           onChange={handleChange}
+          onReasonTextChange={handleSubRelationshipChange}
         />
       ) : null}
       {step === 3 ? (

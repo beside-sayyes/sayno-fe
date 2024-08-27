@@ -320,7 +320,27 @@
   &.type2 {
 
     .directlyWrapper {
+      width: 100%;
+    }
 
+    .warningWrapper {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 5px;
+      gap: 7px;
+
+      .warningIconWrapper {
+        width: 20px;
+        height: 20px;
+      }
+
+      .warningText {
+        font-size: 16px;
+        font-weight: 400;
+        color: #959595;
+        padding-top: 2px;
+      }
     }
 
 

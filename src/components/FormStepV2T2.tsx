@@ -2,7 +2,7 @@ import styles from './FormStep.module.scss';
 import { FormDataV2, OptionObject } from '../types/types.ts';
 import RADIO_OPTIONS_V2 from '../constants/radioOptionsV2.ts';
 import { getParticle } from '../utils/utils.ts';
-import { useEffect, useRef } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 
 interface FormStepV2T2Props {
   question: string | React.ReactNode;
@@ -11,7 +11,7 @@ interface FormStepV2T2Props {
   name: string;
   value: string | OptionObject | null;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  // onReasonTextChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onReasonTextChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   iconStyle?: boolean;
   isV2?: boolean;
   labelType?: string;
@@ -25,7 +25,7 @@ const FormStepV2T2 = ({
   name,
   value,
   onChange,
-  // onReasonTextChange,
+  onReasonTextChange,
   iconStyle = false,
   isV2 = true,
   isT2 = true,
@@ -75,59 +75,80 @@ const FormStepV2T2 = ({
             const noSpaceOptionText = optionText.replace(/\s+/g, '');
 
             return (
-              <div key={index} className={`${styles.customLabelWrapper} ${isChecked ? styles['is-selected'] : null}`}>
-                <label className={styles.label}>
-                  {iconStyle ? (
-                    <div className={styles.customIconWrapper}>
-                      <div className={styles.customIconBox}>
-                        <i className={`icon icon-${noSpaceOptionText}`} />
+              <Fragment key={index}>
+                <div className={`${styles.customLabelWrapper} ${isChecked ? styles['is-selected'] : null}`}>
+                  <label className={styles.label}>
+                    {iconStyle ? (
+                      <div className={styles.customIconWrapper}>
+                        <div className={styles.customIconBox}>
+                          <i className={`icon icon-${noSpaceOptionText}`} />
+                        </div>
                       </div>
+                    ) : null}
+                    <input
+                      type='radio'
+                      name={name}
+                      value={optionValue}
+                      checked={!!isChecked}
+                      onChange={onChange}
+                      style={{ display: 'none' }}
+                    />
+                    {labelType === 'static' ? (
+                      <span className={styles.labelText}>
+                        <span className={'highlight'}>{optionText}</span>에서 <br />
+                        부탁을 받았어요.
+                      </span>
+                    ) : null}
+                    {labelType === 'dynamic' ? (
+                      <span className={styles.labelText}>
+                        <span className={styles.descText}>
+                          {RADIO_OPTIONS_V2.SUB_CATEGORY_DESC_OPTIONS[optionText]}
+                        </span>
+                        {optionText}
+                      </span>
+                    ) : null}
+                    {labelType === 'none' ? <span className={styles.labelText}>{optionText}</span> : null}
+                  </label>
+                  {/*{isObject && optionValue === 1 && isChecked && (*/}
+                  {/*  <>*/}
+                  {/*    <textarea*/}
+                  {/*      maxLength={maxLength}*/}
+                  {/*      className={styles.textarea}*/}
+                  {/*      value={typeof value === 'object' && value && value.id === 1 ? value.text : ''}*/}
+                  {/*      onChange={onReasonTextChange}*/}
+                  {/*      placeholder='500자 이내로 입력해주세요~'*/}
+                  {/*    />*/}
+                  {/*    <div className={styles.countTextWrapper}>*/}
+                  {/*      <span className={styles.countText}>*/}
+                  {/*        {typeof value === 'object' && value && value.id === 1 ? value?.text?.length : '0'}/{maxLength}*/}
+                  {/*      </span>*/}
+                  {/*    </div>*/}
+                  {/*  </>*/}
+                  {/*)}*/}
+                </div>
+                {/* 직접 입력 input */}
+                {isObject && optionValue === 1 && isChecked && (
+                  <div className={styles.directlyWrapper}>
+                    <input
+                      type='text'
+                      className={styles.textInput}
+                      placeholder={'관계 입력'}
+                      name={'subRelationship'}
+                      onChange={onReasonTextChange}
+                    />
+                    <div className={styles.warningWrapper}>
+                      <div className={styles.warningIconWrapper}>
+                        <i className={'icon icon-exclamation-mark'} />
+                      </div>
+                      <span className={styles.warningText}>오탈자를 주의해주세요.</span>
                     </div>
-                  ) : null}
-                  <input
-                    type='radio'
-                    name={name}
-                    value={optionValue}
-                    checked={!!isChecked}
-                    onChange={onChange}
-                    style={{ display: 'none' }}
-                  />
-                  {labelType === 'static' ? (
-                    <span className={styles.labelText}>
-                      <span className={'highlight'}>{optionText}</span>에서 <br />
-                      부탁을 받았어요.
-                    </span>
-                  ) : null}
-                  {labelType === 'dynamic' ? (
-                    <span className={styles.labelText}>
-                      <span className={styles.descText}>{RADIO_OPTIONS_V2.SUB_CATEGORY_DESC_OPTIONS[optionText]}</span>
-                      {optionText}
-                    </span>
-                  ) : null}
-                  {labelType === 'none' ? <span className={styles.labelText}>{optionText}</span> : null}
-                </label>
-                {/*{isObject && optionValue === 1 && isChecked && (*/}
-                {/*  <>*/}
-                {/*    <textarea*/}
-                {/*      maxLength={maxLength}*/}
-                {/*      className={styles.textarea}*/}
-                {/*      value={typeof value === 'object' && value && value.id === 1 ? value.text : ''}*/}
-                {/*      onChange={onReasonTextChange}*/}
-                {/*      placeholder='500자 이내로 입력해주세요~'*/}
-                {/*    />*/}
-                {/*    <div className={styles.countTextWrapper}>*/}
-                {/*      <span className={styles.countText}>*/}
-                {/*        {typeof value === 'object' && value && value.id === 1 ? value?.text?.length : '0'}/{maxLength}*/}
-                {/*      </span>*/}
-                {/*    </div>*/}
-                {/*  </>*/}
-                {/*)}*/}
-              </div>
+                  </div>
+                )}
+
+                {/* END 직접 입력 input */}
+              </Fragment>
             );
           })}
-        </div>
-        <div className={styles.directlyWrapper}>
-          <input type='text' className={styles.textInput} placeholder={'관게를 입력해주세요'} />
         </div>
       </div>
       <div className={styles.subTextAllWrapper}>
