@@ -5,7 +5,7 @@ const RADIO_OPTIONS_V2 = {
     일상: ['사회적 모임', '금전', '약속', '기타'],
     학교: ['과제', '스터디', '행사', '기타'],
   },
-  SUB_CATEGORY_DESC_OPTIONS: {
+  SUB_DESC_OPTIONS: {
     업무: '추가적인 업무요청',
     '회식/모임': '참석하기 싫은',
     '교육/훈련': '참석하기 싫은',
@@ -18,6 +18,8 @@ const RADIO_OPTIONS_V2 = {
     스터디: '참석하기 싫은',
     행사: '참석하기 싫은',
     기타: '',
+    '세이노가 알아서 해줘': '마땅히 생각이 안난다면?',
+    직접입력: '',
   },
   SUB_RELATIONSHIP_OPTIONS: {
     직장: [
@@ -95,20 +97,12 @@ const RADIO_OPTIONS_V2 = {
   AGE_OPTIONS: ['10대', '20대', '30대', '40대', '50대'],
   REASON_OPTIONS: [
     {
-      id: 1,
-      text: '직접 입력',
-    },
-    {
-      id: 2,
-      text: '일정이 안돼서',
-    },
-    {
-      id: 3,
-      text: '돈이 없어서',
-    },
-    {
       id: 4,
       text: '세이노가 알아서 해줘',
+    },
+    {
+      id: 1,
+      text: '직접 입력',
     },
   ],
   STYLE_OPTIONS: ['다정하게', '직구로', '유머러스하게'],

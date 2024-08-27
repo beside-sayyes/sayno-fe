@@ -12,9 +12,8 @@ export interface FormData {
 export interface FormDataV2 {
   category: string | null;
   subCategory: string | null;
-  subRelationship: string | null;
+  subRelationship: { id: number; text: string | null } | null;
   requestDetails: string | null;
-  age: string | null;
   reason: { id: number; text: string | null } | null;
   style: string | null;
   polite: string | null;

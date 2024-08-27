@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import FixedBottomButtonWrapper from '../components/FixedBottomButtonWrapper.tsx';
 import axios from 'axios';
-import Loading from '../components/Loading.tsx';
 import RADIO_OPTIONS_V2 from '../constants/radioOptionsV2.ts';
 import { getParticle } from '../utils/utils.ts';
 import { FormDataV2 } from '../types/types.ts';
 import ProgressStepper from '../components/ProgressStepper.tsx';
 import FormStepV2 from '../components/FormStepV2.tsx';
 import FormStepV2T2 from '../components/FormStepV2T2.tsx';
+import LoadingV2 from '../components/LoadingV2.tsx';
 
 const Question = () => {
   const [step, setStep] = useState(1);
@@ -21,7 +21,6 @@ const Question = () => {
     subCategory: null,
     requestDetails: null,
     subRelationship: null,
-    age: null,
     reason: null,
     style: null,
     polite: null,
@@ -76,29 +75,8 @@ const Question = () => {
     }
 
     if (step === 3) {
-      if (formData.age === null) {
-        alert('나이를 선택해주세요');
-        return;
-      }
-    }
-
-    if (step === 4) {
       if (formData.reason === null) {
         alert('거절사유를 입력해주세요');
-        return;
-      }
-    }
-
-    if (step === 5) {
-      if (formData.style === null) {
-        alert('화법을 선택해주세요');
-        return;
-      }
-    }
-
-    if (step === 6) {
-      if (formData.polite === null) {
-        alert('반말/존댓말 여부를 선택해주세요');
         return;
       }
 
@@ -214,41 +192,34 @@ const Question = () => {
       case 2:
         return !formData.subRelationship;
       case 3:
-        return !formData.age;
-      case 4:
         return !formData.reason;
-      case 5:
-        return !formData.style;
-      case 6:
-        return !formData.polite;
       default:
         return true;
     }
   };
 
   const generateSaynoMessage = async () => {
+    console.log('test');
     setIsLoading(true);
 
     const refuseBody = {
-      situationCategory: formData.category,
-      subSituationCategory: formData.subCategory,
-      request: formData.requestDetails,
-      subRelationship: formData.subRelationship,
-      targetAge: formData.age,
-      refuseReason: formData.reason ? formData.reason.text : '',
-      narration: formData.style,
-      polite: formData.polite,
+      primaryCategory: formData.category,
+      secondaryCategory: formData.subCategory,
+      relationship: formData.subRelationship ? formData.subRelationship.text : '',
+      situation: formData.requestDetails,
+      reason: formData.reason ? formData.reason.text : '',
+      // narration: formData.style,
+      // polite: formData.polite,
     };
 
-    const emotionBody = {
-      situationCategory: formData.category,
-      subSituationCategory: formData.subCategory,
-      request: formData.requestDetails,
-      targetAge: formData.age,
-    };
+    // const emotionBody = {
+    //   situationCategory: formData.category,
+    //   subSituationCategory: formData.subCategory,
+    //   request: formData.requestDetails,
+    // };
 
     try {
-      const response1 = await axios.post(`${import.meta.env.VITE_API_URL}/refuse/register`, refuseBody, {
+      const response1 = await axios.post(`${import.meta.env.VITE_API_URL_V2}/refuse/register`, refuseBody, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -256,15 +227,15 @@ const Question = () => {
 
       const refuseId = response1?.data?.data;
 
-      const response2 = await axios.post(`${import.meta.env.VITE_API_URL}/emotion-and-intent/register`, emotionBody, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      // const response2 = await axios.post(`${import.meta.env.VITE_API_URL}/emotion-and-intent/register`, emotionBody, {
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      // });
+      //
+      // const emotionId = response2?.data?.data;
 
-      const emotionId = response2?.data?.data;
-
-      navigate(`/result?refuse_id=${refuseId}&emotion_id=${emotionId}`);
+      navigate(`/result?refuse_id=${refuseId}`);
     } catch (error) {
       console.log(error);
     } finally {
@@ -285,7 +256,7 @@ const Question = () => {
 
   return (
     <div>
-      {isLoading ? <Loading /> : null}
+      {isLoading ? <LoadingV2 /> : null}
       <Header onBackClick={step === 1 ? handleStepOneBack : handleBack} />
       <ProgressStepper totalSteps={totalStep} step={step} />
       {step === 1 && !isDepthQuestionShow ? (
@@ -351,23 +322,8 @@ const Question = () => {
         <FormStepV2
           question={
             <>
-              상대방의 <br />
-              나이를 알려주세요!
-            </>
-          }
-          description={'요청자의 연령대에 맞는 멘트를 생성해드려요'}
-          options={RADIO_OPTIONS_V2.AGE_OPTIONS}
-          name='age'
-          value={formData.age}
-          onChange={handleChange}
-        />
-      ) : null}
-      {step === 4 ? (
-        <FormStepV2
-          question={
-            <>
-              거절하시는 이유는 <br />
-              무엇인가요?
+              이제 세이노와 함께 <br />
+              거절을 해볼까요?
             </>
           }
           options={RADIO_OPTIONS_V2.REASON_OPTIONS}
@@ -375,6 +331,9 @@ const Question = () => {
           value={formData.reason}
           onChange={handleChange}
           onReasonTextChange={handleReasonTextChange}
+          description={'거절 사유를 입력해주세요!'}
+          customLabelFull={true}
+          labelType={'dynamic'}
         />
       ) : null}
       {step === 5 ? (

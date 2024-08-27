@@ -58,11 +58,11 @@ const FormStepV2T2 = ({
       <div className={styles.subTextAllWrapper}>
         <div className={styles.subTextWrapper}>
           <p className={styles.subText}>상대방과의 관계를 선택해주세요.</p>
-          <div className={styles.subTextButtonWrapper}>
-            <button type={'button'} className={`default-input ${styles.subTextButton}`}>
-              돌아가기
-            </button>
-          </div>
+          {/*<div className={styles.subTextButtonWrapper}>*/}
+          {/*  <button type={'button'} className={`default-input ${styles.subTextButton}`}>*/}
+          {/*    돌아가기*/}
+          {/*  </button>*/}
+          {/*</div>*/}
         </div>
         <div className={iconStyle ? styles.customIconFormWrapper : styles.customNormalWrapper}>
           {options.map((option, index) => {
@@ -101,9 +101,7 @@ const FormStepV2T2 = ({
                     ) : null}
                     {labelType === 'dynamic' ? (
                       <span className={styles.labelText}>
-                        <span className={styles.descText}>
-                          {RADIO_OPTIONS_V2.SUB_CATEGORY_DESC_OPTIONS[optionText]}
-                        </span>
+                        <span className={styles.descText}>{RADIO_OPTIONS_V2.SUB_DESC_OPTIONS[optionText]}</span>
                         {optionText}
                       </span>
                     ) : null}

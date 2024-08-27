@@ -14,6 +14,7 @@ interface FormStepV2Props {
   iconStyle?: boolean;
   isV2?: boolean;
   labelType?: string;
+  customLabelFull?: boolean;
 }
 
 const FormStepV2 = ({
@@ -28,6 +29,7 @@ const FormStepV2 = ({
   iconStyle = false,
   isV2 = true,
   labelType = 'none',
+  customLabelFull = false,
 }: FormStepV2Props) => {
   const maxLength = 500;
 
@@ -51,7 +53,10 @@ const FormStepV2 = ({
           const noSpaceOptionText = optionText.replace(/\s+/g, '');
 
           return (
-            <div key={index} className={`${styles.customLabelWrapper} ${isChecked ? styles['is-selected'] : null}`}>
+            <div
+              key={index}
+              className={`${styles.customLabelWrapper} ${isChecked ? styles['is-selected'] : null} ${customLabelFull ? styles['is-full'] : null}`}
+            >
               <label className={styles.label}>
                 {iconStyle ? (
                   <div className={styles.customIconWrapper}>
@@ -76,7 +81,7 @@ const FormStepV2 = ({
                 ) : null}
                 {labelType === 'dynamic' ? (
                   <span className={styles.labelText}>
-                    <span className={styles.descText}>{RADIO_OPTIONS_V2.SUB_CATEGORY_DESC_OPTIONS[optionText]}</span>
+                    <span className={styles.descText}>{RADIO_OPTIONS_V2.SUB_DESC_OPTIONS[optionText]}</span>
                     {optionText}
                   </span>
                 ) : null}

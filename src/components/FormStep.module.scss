@@ -166,6 +166,10 @@
       margin-top: 16px;
     }
 
+    .description {
+      color: #3D3D3D;
+    }
+
     // 아이콘 버전
     .customIconFormWrapper {
       display: block;
@@ -238,6 +242,10 @@
         width: calc(50% - 4px);
         margin-bottom: 0;
 
+        &.is-full {
+          width: 100%;
+        }
+
         &.is-selected {
           .label {
             border: 1px solid #B6B6B6;
@@ -261,7 +269,7 @@
 
         .descText {
           font-weight: 300;
-          color: #D6D6D6;
+          color: #3D3D3D;
           font-size: 14px;
         }
       }
@@ -342,8 +350,6 @@
         padding-top: 2px;
       }
     }
-
-
 
     .textWrapper {
       margin-bottom: 8px;
@@ -443,4 +449,6 @@
 
     }
   }
+
+
 }
