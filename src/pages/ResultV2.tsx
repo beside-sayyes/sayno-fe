@@ -1,4 +1,3 @@
-import ResultHeader from '../components/ResultHeader.tsx';
 import Footer from '../components/Footer.tsx';
 import styles from './Result.module.scss';
 import Toast from '../components/Toast.tsx';
@@ -6,14 +5,13 @@ import { useEffect, useRef, useState } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner.tsx';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import ResultHeaderV2 from '../components/ResultHeaderV2.tsx';
 
-const Result = () => {
+const Result = ({ isV2 = true }) => {
   const [isShowToast, setIsShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [refuseMessage, setRefuseMessage] = useState('');
-  const [emotionAndIntentText, setEmotionAndIntentText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isEmotionLoading, setIsEmotionLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   const rejectCommentRef = useRef<HTMLParagraphElement>(null);
@@ -21,15 +19,6 @@ const Result = () => {
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const refuseId = queryParams.get('refuse_id');
-
-  const tips = [
-    '상대방의 감정을 이해한다고 말해보세요.',
-    '거절 멘트를 미리 연습해보세요.',
-    '단호하게, 그러나 친절하게 말하세요.',
-    '사실대로 말하는 것이 가장 좋습니다.',
-    '차분하고 안정된 목소리로 말하세요.',
-    '다른 가능성을 제시해보세요.',
-  ];
 
   const showToast = (message: string) => {
     setToastMessage(message);
@@ -55,24 +44,6 @@ const Result = () => {
         showToast('복사에 실패하였습니다.');
         console.log(error);
       }
-    }
-  };
-
-  const fetchEmotionAndIntent = async (id: number) => {
-    setIsEmotionLoading(true);
-
-    try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/emotion-and-intent/${id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = response?.data?.data;
-      setEmotionAndIntentText(data?.emotionAndIntentText);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsEmotionLoading(false);
     }
   };
 
@@ -123,10 +94,10 @@ const Result = () => {
 
   return (
     <div>
-      <ResultHeader />
+      <ResultHeaderV2 />
       <div>
         {/* 결과 박스 */}
-        <div className={styles.resultItemWrapper}>
+        <div className={`${styles.resultItemWrapper} ${isV2 ? styles.typeV2 : ''}`}>
           <div className={styles.resultItemV2TitleWrapper}>
             <p className={`${styles.resultItemV2Desc} highlight`}>거절멘트 생성 결과</p>
             <h2 className={styles.resultItemV2Title}>세이노는 이렇게 거절했어요!</h2>
@@ -144,20 +115,26 @@ const Result = () => {
             >
               {refuseMessage}
             </p>
+            {!isEditing ? (
+              <button
+                type={'button'}
+                className={`default-input ${styles.descriptionEditButton}`}
+                aria-label={'수정하기'}
+                onClick={() => {
+                  setIsEditing(true);
+                }}
+              >
+                <div className={styles.descriptionEditIconWrapper}>
+                  <i className={'icon icon-pencil'} />
+                </div>
+              </button>
+            ) : null}
           </div>
           {!isEditing ? (
             <div className={styles.buttonAllWrapper}>
               <div className={styles.buttonWrapper}>
-                <button
-                  type={'button'}
-                  className={`default-input ${styles.editButton}`}
-                  disabled={isLoading}
-                  aria-label={'수정하기'}
-                  onClick={() => {
-                    setIsEditing(true);
-                  }}
-                >
-                  <span className={styles.buttonText}>수정하기</span>
+                <button type={'button'} className={`default-input ${styles.editButton}`} disabled={isLoading}>
+                  <span className={styles.buttonText}>설정 추가하기</span>
                 </button>
                 <button
                   type={'button'}
