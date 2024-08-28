@@ -199,7 +199,6 @@ const Question = () => {
   };
 
   const generateSaynoMessage = async () => {
-    console.log('test');
     setIsLoading(true);
 
     const refuseBody = {

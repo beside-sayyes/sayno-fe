@@ -20,7 +20,7 @@ const Loading = ({ isV2 = true }) => {
 
     setRandomTipHandler();
 
-    const intervalId = setInterval(setRandomTipHandler, 3000);
+    const intervalId = setInterval(setRandomTipHandler, 5000);
 
     return () => clearInterval(intervalId);
   }, []);

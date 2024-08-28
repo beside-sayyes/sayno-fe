@@ -6,6 +6,7 @@ import Result from './pages/Result.tsx';
 import Error from './pages/Error.tsx';
 import HomeV2 from './pages/HomeV2.tsx';
 import QuestionV2 from './pages/QuestionV2.tsx';
+import ResultV2 from './pages/ResultV2.tsx';
 
 const router = createBrowserRouter([
   {
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/result',
-        element: <Result />,
+        element: <ResultV2 />,
       },
       {
         path: '*',
