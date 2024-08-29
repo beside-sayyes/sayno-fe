@@ -6,6 +6,8 @@ import LoadingSpinner from '../components/LoadingSpinner.tsx';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import ResultHeaderV2 from '../components/ResultHeaderV2.tsx';
+import BottomSheetV2 from '../components/BottomSheetV2.tsx';
+import FooterV2 from '../components/FooterV2.tsx';
 
 const Result = ({ isV2 = true }) => {
   const [isShowToast, setIsShowToast] = useState(false);
@@ -13,6 +15,7 @@ const Result = ({ isV2 = true }) => {
   const [refuseMessage, setRefuseMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isBottomSheetShow, setIsBottomSheetShow] = useState(false);
 
   const rejectCommentRef = useRef<HTMLParagraphElement>(null);
 
@@ -20,15 +23,20 @@ const Result = ({ isV2 = true }) => {
   const queryParams = new URLSearchParams(location.search);
   const refuseId = queryParams.get('refuse_id');
 
+  const onClose = () => {
+    setIsBottomSheetShow(false);
+  };
+
   const showToast = (message: string) => {
     setToastMessage(message);
     setIsShowToast(true);
   };
 
-  const handleUrlCopyClipBoard = async (text: string) => {
+  const handleUrlCopyClipBoard = async () => {
     try {
-      await navigator.clipboard.writeText(text);
-      showToast('서비스 링크가 복사되었어요!');
+      const currentUrl = window.location.href;
+      await navigator.clipboard.writeText(currentUrl);
+      showToast('결과 링크가 복사되었어요!');
     } catch (error) {
       showToast('복사에 실패하였습니다.');
       console.log(error);
@@ -133,7 +141,14 @@ const Result = ({ isV2 = true }) => {
           {!isEditing ? (
             <div className={styles.buttonAllWrapper}>
               <div className={styles.buttonWrapper}>
-                <button type={'button'} className={`default-input ${styles.editButton}`} disabled={isLoading}>
+                <button
+                  type={'button'}
+                  className={`default-input ${styles.editButton}`}
+                  disabled={isLoading}
+                  onClick={() => {
+                    setIsBottomSheetShow(true);
+                  }}
+                >
                   <span className={styles.buttonText}>설정 추가하기</span>
                 </button>
                 <button
@@ -182,13 +197,20 @@ const Result = ({ isV2 = true }) => {
           ) : null}
         </div>
       </div>
+      <div className={styles.middleTextWrapper}>
+        <p className={styles.middleText}>
+          설정 추가하기와 다시 만들기 기능은 <br />
+          최대 3번까지 이용할 수 있습니다.
+        </p>
+      </div>
+
       {/* 결과 공유하기 */}
       <div className={styles.shareWrapper}>
         <button
           className={`default-input ${styles.shareButton}`}
           type={'button'}
           aria-label={'결과 공유하기'}
-          onClick={() => handleUrlCopyClipBoard('https://justsayno.netlify.app')}
+          onClick={handleUrlCopyClipBoard}
         >
           <div className={styles.iconWrapper}>
             <i className={'icon icon-share'} />
@@ -196,8 +218,16 @@ const Result = ({ isV2 = true }) => {
           <span className={styles.recommendationText}>결과 공유하기</span>
         </button>
       </div>
-      <Footer />
+      <FooterV2 />
       <Toast message={toastMessage} isShow={isShowToast} onClose={() => setIsShowToast(false)} />
+      <BottomSheetV2
+        bottomSheetTitle={'설정 추가하기'}
+        isShow={isBottomSheetShow}
+        onClose={onClose}
+        onClick={() => {
+          alert('준비중');
+        }}
+      />
     </div>
   );
 };

@@ -216,7 +216,9 @@
 
 // V2
 .resultItemWrapper {
+
   &.typeV2 {
+    margin-bottom: 20px;
 
     .description {
       padding: 16px 16px 52px 16px;
@@ -289,4 +291,16 @@
 .descriptionEditIconWrapper {
   width: 20px;
   height: 20px;
+}
+
+.middleTextWrapper {
+  margin-bottom: 32px;
+}
+
+.middleText {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #959595;
+  line-height: 1.5;
 }

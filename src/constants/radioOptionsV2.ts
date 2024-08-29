@@ -105,8 +105,8 @@ const RADIO_OPTIONS_V2 = {
       text: '직접 입력',
     },
   ],
-  STYLE_OPTIONS: ['다정하게', '직구로', '유머러스하게'],
-  POLITE_OPTIONS: ['존댓말 사용', '반말 사용'],
+  STYLE_OPTIONS: ['직설적', '완곡하게', '유머러스'],
+  POLITE_OPTIONS: ['존댓말', '반말'],
 };
 
 export default RADIO_OPTIONS_V2;

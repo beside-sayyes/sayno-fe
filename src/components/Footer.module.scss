@@ -24,3 +24,14 @@
   text-align: center;
 }
 
+// V2
+.footer {
+
+  &.typeV2 {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    border-top:  1px solid #494949;
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+}

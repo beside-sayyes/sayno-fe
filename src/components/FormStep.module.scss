@@ -167,7 +167,7 @@
     }
 
     .description {
-      color: #3D3D3D;
+      color: #959595;
     }
 
     // 아이콘 버전
@@ -251,6 +251,10 @@
             border: 1px solid #B6B6B6;
             background-color: #313131;
           }
+
+          .labelText {
+            color: #fff;
+          }
         }
 
         .label {
@@ -265,11 +269,12 @@
           flex-direction: column;
           align-items: flex-start;
           gap: 5px;
+          color: #959595;
         }
 
         .descText {
-          font-weight: 300;
-          color: #3D3D3D;
+          font-weight: 400;
+          color: #959595;
           font-size: 14px;
         }
       }
