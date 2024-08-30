@@ -102,22 +102,6 @@ const FormStepV2T2 = ({
                     ) : null}
                     {labelType === 'none' ? <span className={styles.labelText}>{optionText}</span> : null}
                   </label>
-                  {/*{isObject && optionValue === 1 && isChecked && (*/}
-                  {/*  <>*/}
-                  {/*    <textarea*/}
-                  {/*      maxLength={maxLength}*/}
-                  {/*      className={styles.textarea}*/}
-                  {/*      value={typeof value === 'object' && value && value.id === 1 ? value.text : ''}*/}
-                  {/*      onChange={onReasonTextChange}*/}
-                  {/*      placeholder='500자 이내로 입력해주세요~'*/}
-                  {/*    />*/}
-                  {/*    <div className={styles.countTextWrapper}>*/}
-                  {/*      <span className={styles.countText}>*/}
-                  {/*        {typeof value === 'object' && value && value.id === 1 ? value?.text?.length : '0'}/{maxLength}*/}
-                  {/*      </span>*/}
-                  {/*    </div>*/}
-                  {/*  </>*/}
-                  {/*)}*/}
                 </div>
                 {/* 직접 입력 input */}
                 {isObject && optionValue === 1 && isChecked && (

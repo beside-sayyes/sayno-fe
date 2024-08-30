@@ -1,4 +1,3 @@
-import Footer from '../components/Footer.tsx';
 import styles from './Result.module.scss';
 import Toast from '../components/Toast.tsx';
 import { useEffect, useRef, useState } from 'react';
@@ -209,19 +208,6 @@ const Result = ({ isV2 = true }) => {
                   <span className={styles.buttonText}>복사하기</span>
                 </button>
               </div>
-              {/*<div className={styles.retryButtonWrapper}>*/}
-              {/*  <button*/}
-              {/*    type={'button'}*/}
-              {/*    className={`default-input ${styles.retryButton}`}*/}
-              {/*    disabled={isLoading}*/}
-              {/*    aria-label={'다시 만들래'}*/}
-              {/*    onClick={() => {*/}
-              {/*      reRegisterRefuseMessage(Number(refuseId));*/}
-              {/*    }}*/}
-              {/*  >*/}
-              {/*    다시 만들래*/}
-              {/*  </button>*/}
-              {/*</div>*/}
             </div>
           ) : null}
 
