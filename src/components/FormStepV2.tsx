@@ -30,6 +30,7 @@ const FormStepV2 = ({
   isV2 = true,
   labelType = 'none',
   customLabelFull = false,
+  onClick,
 }: FormStepV2Props) => {
   const maxLength = 500;
 
@@ -52,12 +53,24 @@ const FormStepV2 = ({
             : value === option;
           const noSpaceOptionText = optionText.replace(/\s+/g, '');
 
+          const handleInputChange = (event: any) => {
+            if (event.target && event.target instanceof HTMLInputElement) {
+              onChange(event as React.ChangeEvent<HTMLInputElement>);
+            }
+
+            if (onClick) {
+              setTimeout(() => {
+                onClick();
+              }, 100);
+            }
+          };
+
           return (
             <div
               key={index}
               className={`${styles.customLabelWrapper} ${isChecked ? styles['is-selected'] : null} ${customLabelFull ? styles['is-full'] : null}`}
             >
-              <label className={styles.label}>
+              <label className={styles.label} onClick={handleInputChange}>
                 {iconStyle ? (
                   <div className={styles.customIconWrapper}>
                     <div className={styles.customIconBox}>
@@ -70,7 +83,7 @@ const FormStepV2 = ({
                   name={name}
                   value={optionValue}
                   checked={!!isChecked}
-                  onChange={onChange}
+                  onChange={handleInputChange}
                   style={{ display: 'none' }}
                 />
                 {labelType === 'static' ? (

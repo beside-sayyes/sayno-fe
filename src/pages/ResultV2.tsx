@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import ResultHeaderV2 from '../components/ResultHeaderV2.tsx';
 import BottomSheetV2 from '../components/BottomSheetV2.tsx';
 import FooterV2 from '../components/FooterV2.tsx';
+import RADIO_OPTIONS_V2 from '../constants/radioOptionsV2.ts';
 
 const Result = ({ isV2 = true }) => {
   const [isShowToast, setIsShowToast] = useState(false);
@@ -16,12 +17,24 @@ const Result = ({ isV2 = true }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isBottomSheetShow, setIsBottomSheetShow] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState({
+    style: RADIO_OPTIONS_V2.STYLE_OPTIONS[0],
+    polite: RADIO_OPTIONS_V2.POLITE_OPTIONS[0],
+  });
 
   const rejectCommentRef = useRef<HTMLParagraphElement>(null);
 
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const refuseId = queryParams.get('refuse_id');
+
+  const generateReRegisterRefuseMessage = async () => {
+    await reRegisterRefuseMessage(Number(refuseId));
+  };
+
+  const generateReAddRegisterRefuseMessage = async () => {
+    await reAddRegisterRefuseMessage(Number(refuseId));
+  };
 
   const onClose = () => {
     setIsBottomSheetShow(false);
@@ -74,11 +87,36 @@ const Result = ({ isV2 = true }) => {
     }
   };
 
+  const reAddRegisterRefuseMessage = async (id: number) => {
+    setIsLoading(true);
+
+    const refuseBody = {
+      claudeId: id,
+      narration: selectedOptions.style,
+      polite: selectedOptions.polite,
+    };
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL_V2}/refuse/option-fix-register`, refuseBody, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const newRefuseId = response?.data?.data;
+      navigate(`/result?refuse_id=${newRefuseId}`);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+      onClose();
+    }
+  };
+
   const reRegisterRefuseMessage = async (id: number) => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/refuse/re-register/${id}`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL_V2}/refuse/re-register/${id}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -92,6 +130,13 @@ const Result = ({ isV2 = true }) => {
     }
   };
 
+  const handleOptionChange = (type: 'style' | 'polite', value: string) => {
+    setSelectedOptions((prevOptions) => ({
+      ...prevOptions,
+      [type]: value,
+    }));
+  };
+
   useEffect(() => {
     const refuseIdNumber = refuseId ? Number(refuseId) : null;
 
@@ -102,7 +147,7 @@ const Result = ({ isV2 = true }) => {
 
   return (
     <div>
-      <ResultHeaderV2 />
+      <ResultHeaderV2 onClick={generateReRegisterRefuseMessage} />
       <div>
         {/* 결과 박스 */}
         <div className={`${styles.resultItemWrapper} ${isV2 ? styles.typeV2 : ''}`}>
@@ -224,9 +269,10 @@ const Result = ({ isV2 = true }) => {
         bottomSheetTitle={'설정 추가하기'}
         isShow={isBottomSheetShow}
         onClose={onClose}
-        onClick={() => {
-          alert('준비중');
-        }}
+        onClick={generateReAddRegisterRefuseMessage}
+        selectedOptions={selectedOptions}
+        handleOptionChange={handleOptionChange}
+        disabled={isLoading}
       />
     </div>
   );

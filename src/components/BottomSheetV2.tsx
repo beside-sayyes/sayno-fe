@@ -1,6 +1,6 @@
 import styles from './BottomSheet.module.scss';
 import PrimaryButton from './PrimaryButton.tsx';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import RADIO_OPTIONS_V2 from '../constants/radioOptionsV2.ts';
 
 interface BottomSheetProps {
@@ -8,22 +8,25 @@ interface BottomSheetProps {
   bottomSheetTitle: string;
   onClose: () => void;
   onClick: () => void;
+  selectedOptions: {
+    style: string;
+    polite: string;
+  };
+  handleOptionChange: (type: 'style' | 'polite', value: string) => void;
   isV2?: boolean;
+  disabled: boolean;
 }
 
-const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, isV2 = true }: BottomSheetProps) => {
-  const [selectedOptions, setSelectedOptions] = useState({
-    style: RADIO_OPTIONS_V2.STYLE_OPTIONS[0],
-    polite: RADIO_OPTIONS_V2.POLITE_OPTIONS[0],
-  });
-
-  const handleOptionChange = (type: 'style' | 'polite', value: string) => {
-    setSelectedOptions((prevOptions) => ({
-      ...prevOptions,
-      [type]: value,
-    }));
-  };
-
+const BottomSheet = ({
+  isShow,
+  onClose,
+  onClick,
+  bottomSheetTitle,
+  selectedOptions,
+  handleOptionChange,
+  isV2 = true,
+  disabled,
+}: BottomSheetProps) => {
   return (
     <div className={`${styles.allWrapper} ${isV2 ? styles.typeV2 : ''} ${isShow ? styles['is-show'] : null}`}>
       <div className={styles.dimOverlay} />
@@ -98,7 +101,7 @@ const BottomSheet = ({ isShow, onClose, onClick, bottomSheetTitle, isV2 = true }
             })}
           </div>
         </div>
-        <PrimaryButton buttonText={'멘트 재요청'} onClick={onClick} disabled={false} />
+        <PrimaryButton buttonText={'멘트 재요청'} onClick={onClick} disabled={disabled} />
       </div>
     </div>
   );

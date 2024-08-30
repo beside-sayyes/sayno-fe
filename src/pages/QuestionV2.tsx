@@ -48,21 +48,11 @@ const Question = () => {
     }));
   };
 
-  const handleStepOneNext = () => {
-    if (formData.category === null) {
-      alert('상황을 입력해주세요');
-      return;
-    }
+  const handleStepOneOneNext = () => {
+    setIsDepthQuestionShow(true);
+  };
 
-    if (formData.subCategory === null && !isDepthQuestionShow) {
-      setIsDepthQuestionShow(true);
-      return;
-    }
-
-    if (formData.subCategory === null) {
-      alert('추가 상황을 입력해주세요');
-      return;
-    }
+  const handleStepOneTwoNext = () => {
     setStep(step + 1);
   };
 
@@ -190,7 +180,7 @@ const Question = () => {
       case 1:
         return !formData.category || (isDepthQuestionShow && !formData.subCategory);
       case 2:
-        return !formData.subRelationship;
+        return !formData.subRelationship || !formData.requestDetails;
       case 3:
         return !formData.reason;
       default:
@@ -272,6 +262,7 @@ const Question = () => {
           onChange={handleChange}
           iconStyle={true}
           labelType={'static'}
+          onClick={handleStepOneOneNext}
         />
       ) : null}
       {step === 1 && isDepthQuestionShow && formData.category ? (
@@ -288,6 +279,7 @@ const Question = () => {
           value={formData.subCategory}
           onChange={handleChange}
           labelType={'dynamic'}
+          onClick={handleStepOneTwoNext}
         />
       ) : null}
       {/*{step === 1 ? (*/}
@@ -364,11 +356,9 @@ const Question = () => {
           onChange={handleChange}
         />
       ) : null}
-      <FixedBottomButtonWrapper
-        buttonText={'다음'}
-        onClick={step === 1 ? handleStepOneNext : handleNext}
-        disabled={isNextDisabled}
-      />
+      {step !== 1 ? (
+        <FixedBottomButtonWrapper buttonText={'다음'} onClick={handleNext} disabled={isNextDisabled} />
+      ) : null}
     </div>
   );
 };

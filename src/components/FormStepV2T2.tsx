@@ -161,7 +161,7 @@ const FormStepV2T2 = ({
           />
           <div className={styles.countTextWrapper}>
             <span className={styles.countText}>
-              {typeof value === 'object' && value && value.id === 1 ? value?.text?.length : '0'}/{maxLength}
+              {formData.requestDetails ? formData.requestDetails?.length : '0'}/{maxLength}
             </span>
           </div>
         </div>
