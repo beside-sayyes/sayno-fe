@@ -12,7 +12,7 @@ const ResultHeader = ({ onClick, isV2 = true }) => {
     <header className={`${styles.header} ${isV2 ? styles.typeV2 : ''}`}>
       <div className={styles.inner}>
         <div className={styles.logoImgWrapper} onClick={moveHome}>
-          <img className={styles.logoImg} src='images/logo_sayno.png' alt='sayno logo' />
+          <img className={styles.logoImg} src='/images/logo_sayno_header.png' alt='sayno logo' />
         </div>
         <button className={`default-input ${styles.refreshButton}`} onClick={onClick}>
           <div className={styles.IconWrapper}>

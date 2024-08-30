@@ -10,6 +10,7 @@ import ProgressStepper from '../components/ProgressStepper.tsx';
 import FormStepV2 from '../components/FormStepV2.tsx';
 import FormStepV2T2 from '../components/FormStepV2T2.tsx';
 import LoadingV2 from '../components/LoadingV2.tsx';
+import HeaderV2 from '../components/HeaderV2.tsx';
 
 const Question = () => {
   const [step, setStep] = useState(1);
@@ -246,7 +247,7 @@ const Question = () => {
   return (
     <div>
       {isLoading ? <LoadingV2 /> : null}
-      <Header onBackClick={step === 1 ? handleStepOneBack : handleBack} />
+      <HeaderV2 onBackClick={step === 1 ? handleStepOneBack : handleBack} />
       <ProgressStepper totalSteps={totalStep} step={step} />
       {step === 1 && !isDepthQuestionShow ? (
         <FormStepV2

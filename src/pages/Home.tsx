@@ -6,7 +6,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const moveQuestion = () => {
-    navigate('/question');
+    navigate('/v1/question');
   };
 
   return (

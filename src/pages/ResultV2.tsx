@@ -154,7 +154,7 @@ const Result = ({ isV2 = true }) => {
             <p className={`${styles.resultItemV2Desc} highlight`}>거절멘트 생성 결과</p>
             <h2 className={styles.resultItemV2Title}>세이노는 이렇게 거절했어요!</h2>
             <div className={styles.resultItemV2ImgWrapper}>
-              <img className={styles.resultItemV2Img} src='images/img_congrats.png' />
+              <img className={styles.resultItemV2Img} src='/images/img_congrats.png' />
             </div>
           </div>
           <div className={`${styles.descriptionWrapper} ${styles.typeReject}`}>

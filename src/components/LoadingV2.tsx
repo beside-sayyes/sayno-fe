@@ -29,7 +29,7 @@ const Loading = ({ isV2 = true }) => {
     <div className={`${styles.layout} ${isV2 ? styles.typeV2 : ''}`}>
       <div className={styles.inner}>
         <div className={styles.imgWrapper}>
-          <img src='images/img_purple_heart.png' alt='loading image' className={styles.img} />
+          <img src='/images/img_purple_heart.png' alt='loading image' className={styles.img} />
         </div>
         <p className={styles.subDescription}>최대 30초가 걸릴 수 있어요...</p>
         <h2 className={styles.title}>

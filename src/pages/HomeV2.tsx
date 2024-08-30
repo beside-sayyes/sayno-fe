@@ -18,10 +18,10 @@ const Home = ({ isV2 = true }) => {
           AI 거절멘트 생성 서비스
         </h1>
         <div className={styles.logoWrapper}>
-          <img className={styles.logoImg} src='images/logo_sayno.png' alt='sayno logo' />
+          <img className={styles.logoImg} src='/images/logo_sayno.png' alt='sayno logo' />
         </div>
         <div className={styles.titleImgWrapper}>
-          <img className={styles.titleImg} src='images/img_sayno_hand.png' alt='sayno hand' />
+          <img className={styles.titleImg} src='/images/img_sayno_hand.png' alt='sayno hand' />
         </div>
       </div>
       <div className={styles.featureWrapper}>
@@ -62,7 +62,9 @@ const Home = ({ isV2 = true }) => {
         </ul>
       </div>
       <div className={styles.fixedMainTextWrapper}>
-        <p className={styles.fixedMainText}>벌써 500개가 넘는 거절멘트들이 모였어요!</p>
+        <p className={styles.fixedMainText}>
+          벌써 <span className={'highlight'}>500개</span>가 넘는 거절멘트들이 모였어요!
+        </p>
       </div>
       <FixedBottomButtonWrapper buttonText={'시작하기'} onClick={moveQuestion} />
     </div>
