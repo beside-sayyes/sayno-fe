@@ -1,4 +1,3 @@
-import Header from '../components/Header.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import FixedBottomButtonWrapper from '../components/FixedBottomButtonWrapper.tsx';
@@ -16,15 +15,12 @@ const Question = () => {
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isDepthQuestionShow, setIsDepthQuestionShow] = useState(false);
-  // const [isBottomSheetShow, setIsBottomSheetShow] = useState(false);
   const [formData, setFormData] = useState<FormDataV2>({
     category: null,
     subCategory: null,
     requestDetails: null,
     subRelationship: null,
     reason: null,
-    style: null,
-    polite: null,
   });
   const [isNextDisabled, setIsNextDisabled] = useState(true);
   const totalStep = 3;
@@ -78,19 +74,6 @@ const Question = () => {
     setStep(step + 1);
   };
 
-  // const onClose = () => {
-  //   setIsBottomSheetShow(false);
-  // };
-
-  // const goStepTwo = () => {
-  //   if (!formData.requestDetails) {
-  //     alert('자세한 요청 사항을 적어주세요');
-  //     return;
-  //   }
-  //
-  //   setStep(2);
-  // };
-
   const handleStepOneBack = () => {
     if (isDepthQuestionShow) {
       setIsDepthQuestionShow(false);
@@ -112,14 +95,16 @@ const Question = () => {
         return {
           ...prevFormData,
           [name]: value,
-          subCategory: null, // category 변경 시 subCategory를 null로 설정
-          requestDetails: null, // category 변경 시 requestDetails를 null로 설정
+          subCategory: null,
+          requestDetails: null,
+          subRelationship: null,
         };
       } else if (name === 'subCategory') {
         return {
           ...prevFormData,
           [name]: value,
-          requestDetails: null, // subCategory 변경 시 requestDetails를 null로 설정
+          requestDetails: null,
+          subRelationship: null,
         };
       } else if (name === 'reason') {
         const selectedReason = RADIO_OPTIONS_V2.REASON_OPTIONS.find((reason) => reason.id === Number(value));
@@ -198,15 +183,7 @@ const Question = () => {
       relationship: formData.subRelationship ? formData.subRelationship.text : '',
       situation: formData.requestDetails,
       reason: formData.reason ? formData.reason.text : '',
-      // narration: formData.style,
-      // polite: formData.polite,
     };
-
-    // const emotionBody = {
-    //   situationCategory: formData.category,
-    //   subSituationCategory: formData.subCategory,
-    //   request: formData.requestDetails,
-    // };
 
     try {
       const response1 = await axios.post(`${import.meta.env.VITE_API_URL_V2}/refuse/register`, refuseBody, {
@@ -216,14 +193,6 @@ const Question = () => {
       });
 
       const refuseId = response1?.data?.data;
-
-      // const response2 = await axios.post(`${import.meta.env.VITE_API_URL}/emotion-and-intent/register`, emotionBody, {
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      // });
-      //
-      // const emotionId = response2?.data?.data;
 
       navigate(`/result?refuse_id=${refuseId}`);
     } catch (error) {
@@ -242,7 +211,6 @@ const Question = () => {
   }, [step]);
 
   console.log('formData', formData);
-  console.log('step', step);
 
   return (
     <div>
@@ -283,17 +251,6 @@ const Question = () => {
           onClick={handleStepOneTwoNext}
         />
       ) : null}
-      {/*{step === 1 ? (*/}
-      {/*  <BottomSheet*/}
-      {/*    bottomSheetTitle={'어떤 요청을 받으셨어요?'}*/}
-      {/*    bottomSheetDesciption={'구체적으로 말씀해 주세요'}*/}
-      {/*    isShow={isBottomSheetShow}*/}
-      {/*    onClose={onClose}*/}
-      {/*    onClick={goStepTwo}*/}
-      {/*    formData={formData}*/}
-      {/*    setFormData={setFormData}*/}
-      {/*  />*/}
-      {/*) : null}*/}
       {step === 2 ? (
         <FormStepV2T2
           question={

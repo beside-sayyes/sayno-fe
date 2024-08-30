@@ -7,14 +7,12 @@ import { Fragment, useEffect, useRef } from 'react';
 interface FormStepV2T2Props {
   question: string | React.ReactNode;
   description?: string;
-  options: string[] | OptionObject[];
+  options: { id: number; text: string | null } | null;
   name: string;
   value: string | OptionObject | null;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onReasonTextChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  iconStyle?: boolean;
   isV2?: boolean;
-  labelType?: string;
   formData: FormDataV2;
 }
 
@@ -26,10 +24,8 @@ const FormStepV2T2 = ({
   value,
   onChange,
   onReasonTextChange,
-  iconStyle = false,
   isV2 = true,
   isT2 = true,
-  labelType = 'none',
   formData,
 }: FormStepV2T2Props) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -59,7 +55,7 @@ const FormStepV2T2 = ({
         <div className={styles.subTextWrapper}>
           <p className={styles.subText}>상대방과의 관계를 선택해주세요.</p>
         </div>
-        <div className={iconStyle ? styles.customIconFormWrapper : styles.customNormalWrapper}>
+        <div className={styles.customNormalWrapper}>
           {options.map((option, index) => {
             const isObject = typeof option === 'object';
             const optionValue = isObject ? (option as OptionObject).id : option;
@@ -67,19 +63,11 @@ const FormStepV2T2 = ({
             const isChecked = isObject
               ? value && typeof value === 'object' && value.id === (option as OptionObject).id
               : value === option;
-            const noSpaceOptionText = optionText.replace(/\s+/g, '');
 
             return (
               <Fragment key={index}>
                 <div className={`${styles.customLabelWrapper} ${isChecked ? styles['is-selected'] : null}`}>
                   <label className={styles.label}>
-                    {iconStyle ? (
-                      <div className={styles.customIconWrapper}>
-                        <div className={styles.customIconBox}>
-                          <i className={`icon icon-${noSpaceOptionText}`} />
-                        </div>
-                      </div>
-                    ) : null}
                     <input
                       type='radio'
                       name={name}
@@ -88,19 +76,7 @@ const FormStepV2T2 = ({
                       onChange={onChange}
                       style={{ display: 'none' }}
                     />
-                    {labelType === 'static' ? (
-                      <span className={styles.labelText}>
-                        <span className={'highlight'}>{optionText}</span>에서 <br />
-                        부탁을 받았어요.
-                      </span>
-                    ) : null}
-                    {labelType === 'dynamic' ? (
-                      <span className={styles.labelText}>
-                        <span className={styles.descText}>{RADIO_OPTIONS_V2.SUB_DESC_OPTIONS[optionText]}</span>
-                        {optionText}
-                      </span>
-                    ) : null}
-                    {labelType === 'none' ? <span className={styles.labelText}>{optionText}</span> : null}
+                    <span className={styles.labelText}>{optionText}</span>
                   </label>
                 </div>
                 {/* 직접 입력 input */}

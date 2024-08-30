@@ -15,8 +15,6 @@ export interface FormDataV2 {
   subRelationship: { id: number; text: string | null } | null;
   requestDetails: string | null;
   reason: { id: number; text: string | null } | null;
-  style: string | null;
-  polite: string | null;
 }
 
 export interface OptionObject {
