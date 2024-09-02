@@ -10,6 +10,7 @@ import FormStepV2 from '../components/FormStepV2.tsx';
 import FormStepV2T2 from '../components/FormStepV2T2.tsx';
 import LoadingV2 from '../components/LoadingV2.tsx';
 import HeaderV2 from '../components/HeaderV2.tsx';
+import ERROR_CODES from '../constants/errorCodes.js';
 
 const Question = () => {
   const [step, setStep] = useState(1);
@@ -196,7 +197,10 @@ const Question = () => {
 
       navigate(`/result?refuse_id=${refuseId}`);
     } catch (error) {
-      console.log(error);
+      const errorCode = error.response && error.response.status;
+      if (errorCode === ERROR_CODES.TooManyRequest) {
+        alert('해당 요청은 1시간에 최대 3회까지 이용 가능합니다.');
+      }
     } finally {
       setIsLoading(false);
     }

@@ -8,6 +8,7 @@ import ResultHeaderV2 from '../components/ResultHeaderV2.tsx';
 import BottomSheetV2 from '../components/BottomSheetV2.tsx';
 import FooterV2 from '../components/FooterV2.tsx';
 import RADIO_OPTIONS_V2 from '../constants/radioOptionsV2.ts';
+import ERROR_CODES from '../constants/errorCodes.js';
 
 const Result = ({ isV2 = true }) => {
   const [isShowToast, setIsShowToast] = useState(false);
@@ -77,7 +78,6 @@ const Result = ({ isV2 = true }) => {
         },
       });
       const data = response?.data?.data;
-      console.log('data', data);
       setRefuseMessage(data);
     } catch (error) {
       console.log(error);
@@ -104,7 +104,10 @@ const Result = ({ isV2 = true }) => {
       const newRefuseId = response?.data?.data;
       navigate(`/result?refuse_id=${newRefuseId}`);
     } catch (error) {
-      console.log(error);
+      const errorCode = error.response && error.response.status;
+      if (errorCode === ERROR_CODES.TooManyRequest) {
+        alert('해당 요청은 1시간에 최대 3회까지 이용 가능합니다.');
+      }
     } finally {
       setIsLoading(false);
       onClose();
@@ -123,7 +126,10 @@ const Result = ({ isV2 = true }) => {
       const newRefuseId = response?.data?.data;
       navigate(`/result?refuse_id=${newRefuseId}`);
     } catch (error) {
-      console.log(error);
+      const errorCode = error.response && error.response.status;
+      if (errorCode === ERROR_CODES.TooManyRequest) {
+        alert('해당 요청은 1시간에 최대 3회까지 이용 가능합니다.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -193,7 +199,7 @@ const Result = ({ isV2 = true }) => {
                     setIsBottomSheetShow(true);
                   }}
                 >
-                  <span className={styles.buttonText}>설정 추가하기</span>
+                  <span className={styles.buttonText}>설정 변경하기</span>
                 </button>
                 <button
                   type={'button'}
@@ -230,7 +236,7 @@ const Result = ({ isV2 = true }) => {
       </div>
       <div className={styles.middleTextWrapper}>
         <p className={styles.middleText}>
-          설정 추가하기와 다시 만들기 기능은 <br />
+          설정 변경과 다시 만들기 기능은 1시간에 <br />
           최대 3번까지 이용할 수 있습니다.
         </p>
       </div>
@@ -252,7 +258,7 @@ const Result = ({ isV2 = true }) => {
       <FooterV2 />
       <Toast message={toastMessage} isShow={isShowToast} onClose={() => setIsShowToast(false)} />
       <BottomSheetV2
-        bottomSheetTitle={'설정 추가하기'}
+        bottomSheetTitle={'설정 변경하기'}
         isShow={isBottomSheetShow}
         onClose={onClose}
         onClick={generateReAddRegisterRefuseMessage}
