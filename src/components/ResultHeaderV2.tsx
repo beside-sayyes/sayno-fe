@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './ResultHeader.module.scss';
 
-const ResultHeader = ({ onClick, isV2 = true }) => {
+const ResultHeader = ({ onClick, isV2 = true, disabled }) => {
   const navigate = useNavigate();
 
   const moveHome = () => {
@@ -14,7 +14,7 @@ const ResultHeader = ({ onClick, isV2 = true }) => {
         <div className={styles.logoImgWrapper} onClick={moveHome}>
           <img className={styles.logoImg} src='/images/logo_sayno_header.png' alt='sayno logo' />
         </div>
-        <button className={`default-input ${styles.refreshButton}`} onClick={onClick}>
+        <button className={`default-input ${styles.refreshButton}`} onClick={onClick} disabled={disabled}>
           <div className={styles.IconWrapper}>
             <i className={'icon icon-refresh'} />
           </div>

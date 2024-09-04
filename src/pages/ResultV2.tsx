@@ -152,7 +152,7 @@ const Result = ({ isV2 = true }) => {
 
   return (
     <div>
-      <ResultHeaderV2 onClick={generateReRegisterRefuseMessage} />
+      <ResultHeaderV2 onClick={generateReRegisterRefuseMessage} disabled={isLoading} />
       <div>
         {/* 결과 박스 */}
         <div className={`${styles.resultItemWrapper} ${isV2 ? styles.typeV2 : ''}`}>
