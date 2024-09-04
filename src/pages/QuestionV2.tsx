@@ -199,7 +199,8 @@ const Question = () => {
     } catch (error) {
       const errorCode = error.response && error.response.status;
       if (errorCode === ERROR_CODES.TooManyRequest) {
-        alert('해당 요청은 1시간에 최대 3회까지 이용 가능합니다.');
+        alert('세이노의 생성 기능은 최대 3회까지 이용하실 수 있어요!');
+        navigate('/');
       }
     } finally {
       setIsLoading(false);
