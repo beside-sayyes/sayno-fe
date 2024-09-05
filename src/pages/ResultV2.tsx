@@ -178,6 +178,7 @@ const Result = ({ isV2 = true }) => {
                 type={'button'}
                 className={`default-input ${styles.descriptionEditButton}`}
                 aria-label={'수정하기'}
+                disabled={isLoading}
                 onClick={() => {
                   setIsEditing(true);
                 }}
@@ -247,6 +248,7 @@ const Result = ({ isV2 = true }) => {
           className={`default-input ${styles.shareButton}`}
           type={'button'}
           aria-label={'결과 공유하기'}
+          disabled={isLoading}
           onClick={handleUrlCopyClipBoard}
         >
           <div className={styles.iconWrapper}>

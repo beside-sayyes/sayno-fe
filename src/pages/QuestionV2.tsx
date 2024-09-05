@@ -215,8 +215,6 @@ const Question = () => {
     window.scrollTo(0, 0);
   }, [step]);
 
-  console.log('formData', formData);
-
   return (
     <div>
       {isLoading ? <LoadingV2 /> : null}
