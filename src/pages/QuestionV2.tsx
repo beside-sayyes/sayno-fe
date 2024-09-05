@@ -11,6 +11,7 @@ import FormStepV2T2 from '../components/FormStepV2T2.tsx';
 import LoadingV2 from '../components/LoadingV2.tsx';
 import HeaderV2 from '../components/HeaderV2.tsx';
 import ERROR_CODES from '../constants/errorCodes.js';
+import { canMakeRequest, incrementRequestCount } from '../utils/requestLimit.ts';
 
 const Question = () => {
   const [step, setStep] = useState(1);
@@ -176,6 +177,11 @@ const Question = () => {
   };
 
   const generateSaynoMessage = async () => {
+    if (!canMakeRequest()) {
+      alert('세이노의 생성 기능은 1시간에 최대 3회까지 이용하실 수 있어요!');
+      return;
+    }
+
     setIsLoading(true);
 
     const refuseBody = {
@@ -194,7 +200,7 @@ const Question = () => {
       });
 
       const refuseId = response1?.data?.data;
-
+      incrementRequestCount();
       navigate(`/result?refuse_id=${refuseId}`);
     } catch (error) {
       const errorCode = error.response && error.response.status;

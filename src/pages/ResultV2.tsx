@@ -9,6 +9,7 @@ import BottomSheetV2 from '../components/BottomSheetV2.tsx';
 import FooterV2 from '../components/FooterV2.tsx';
 import RADIO_OPTIONS_V2 from '../constants/radioOptionsV2.ts';
 import ERROR_CODES from '../constants/errorCodes.js';
+import { canMakeRequest, incrementRequestCount } from '../utils/requestLimit.ts';
 
 const Result = ({ isV2 = true }) => {
   const [isShowToast, setIsShowToast] = useState(false);
@@ -87,6 +88,11 @@ const Result = ({ isV2 = true }) => {
   };
 
   const reAddRegisterRefuseMessage = async (id: number) => {
+    if (!canMakeRequest()) {
+      alert('세이노의 생성 기능은 1시간에 최대 3회까지 이용하실 수 있어요!');
+      return;
+    }
+
     setIsLoading(true);
 
     const refuseBody = {
@@ -102,11 +108,12 @@ const Result = ({ isV2 = true }) => {
         },
       });
       const newRefuseId = response?.data?.data;
+      incrementRequestCount();
       navigate(`/result?refuse_id=${newRefuseId}`);
     } catch (error) {
       const errorCode = error.response && error.response.status;
       if (errorCode === ERROR_CODES.TooManyRequest) {
-        alert('세이노의 생성 기능은 최대 3회까지 이용하실 수 있어요!');
+        alert('세이노의 생성 기능은 1시간에 최대 3회까지 이용하실 수 있어요!');
       }
     } finally {
       setIsLoading(false);
@@ -115,6 +122,11 @@ const Result = ({ isV2 = true }) => {
   };
 
   const reRegisterRefuseMessage = async (id: number) => {
+    if (!canMakeRequest()) {
+      alert('세이노의 생성 기능은 1시간에 최대 3회까지 이용하실 수 있어요!');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -124,11 +136,12 @@ const Result = ({ isV2 = true }) => {
         },
       });
       const newRefuseId = response?.data?.data;
+      incrementRequestCount();
       navigate(`/result?refuse_id=${newRefuseId}`);
     } catch (error) {
       const errorCode = error.response && error.response.status;
       if (errorCode === ERROR_CODES.TooManyRequest) {
-        alert('세이노의 생성 기능은 최대 3회까지 이용하실 수 있어요!');
+        alert('세이노의 생성 기능은 1시간에 최대 3회까지 이용하실 수 있어요!');
       }
     } finally {
       setIsLoading(false);
