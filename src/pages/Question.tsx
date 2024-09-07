@@ -142,7 +142,7 @@ const Question = () => {
       setIsDepthQuestionShow(false);
       window.scrollTo(0, 0);
     } else {
-      navigate('/');
+      navigate('/v1');
     }
   };
 

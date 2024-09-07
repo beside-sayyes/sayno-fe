@@ -9,7 +9,7 @@ const Header = ({ onBackClick }: HeaderProps) => {
   const navigate = useNavigate();
 
   const moveHome = () => {
-    navigate('/');
+    navigate('/v1');
   };
 
   return (

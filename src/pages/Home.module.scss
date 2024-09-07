@@ -9,16 +9,20 @@
   // V2
   &.typeV2 {
     flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 48px;
 
     .title {
       font-weight: 500;
-      font-size: 24px;
-      margin-bottom: 17px;
+      font-size: 20px;
+      margin-bottom: 10px;
+      line-height: 1.5;
     }
 
     .logoWrapper {
-      width: 310px;
-      height: 146px;
+      width: 240px;
+      height: 113px;
+      margin: 0 auto;
     }
   }
 }
@@ -48,15 +52,16 @@
 // V2
 .titleWrapper {
   position: relative;
+  width: 100%;
 }
 
 .titleImgWrapper {
   position: absolute;
-  left: -60px;
+  left: 0;
   top: auto;
-  bottom: -106px;
-  width: 228px;
-  height: 228px;
+  bottom: -90px;
+  width: 184px;
+  height: 184px;
 
   .titleImg {
     width: 100%;
@@ -70,7 +75,7 @@
   left: 50%;
   transform: translateX(-50%);
   top: auto;
-  bottom: 172px;
+  bottom: 147px;
 }
 
 .featureGroup {
