@@ -250,7 +250,7 @@ const Result = ({ isV2 = true }) => {
       </div>
       <div className={styles.middleTextWrapper}>
         <p className={styles.middleText}>
-          설정 변경과 다시 만들기 기능은 1시간에 <br />
+          다시 만들기 기능은 1시간에 <br />
           최대 3번까지 이용할 수 있습니다.
         </p>
       </div>
