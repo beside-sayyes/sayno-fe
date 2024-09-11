@@ -205,16 +205,16 @@ const Result = ({ isV2 = true }) => {
           {!isEditing ? (
             <div className={styles.buttonAllWrapper}>
               <div className={styles.buttonWrapper}>
-                <button
-                  type={'button'}
-                  className={`default-input ${styles.editButton}`}
-                  disabled={isLoading}
-                  onClick={() => {
-                    setIsBottomSheetShow(true);
-                  }}
-                >
-                  <span className={styles.buttonText}>설정 변경하기</span>
-                </button>
+                {/*<button*/}
+                {/*  type={'button'}*/}
+                {/*  className={`default-input ${styles.editButton}`}*/}
+                {/*  disabled={isLoading}*/}
+                {/*  onClick={() => {*/}
+                {/*    setIsBottomSheetShow(true);*/}
+                {/*  }}*/}
+                {/*>*/}
+                {/*  <span className={styles.buttonText}>설정 변경하기</span>*/}
+                {/*</button>*/}
                 <button
                   type={'button'}
                   className={`default-input ${styles.copyButton}`}
