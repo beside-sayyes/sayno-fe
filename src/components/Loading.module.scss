@@ -44,3 +44,64 @@
   text-align: center;
   margin-top: 16px;
 }
+
+// V2 관련
+
+.layout {
+
+  &.typeV2 {
+
+    .inner {
+      padding: 48px 24px 0 24px;
+      justify-content: flex-start;
+    }
+
+    .subDescription {
+      font-weight: 400;
+      font-size: 14px;
+      color: #959595;
+      margin-top: 16px;
+    }
+
+    .title {
+      font-size: 32px;
+      margin-top: 16px;
+      line-height: 1.4;
+    }
+  }
+}
+
+.tipItemWrapper {
+  background-color: #242C32;
+  padding: 16px;
+  width: 100%;
+  margin-top: 40px;
+  border-radius: 12px;
+}
+
+.tipItemTitleWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tipItemImgWrapper {
+  width: 24px;
+  height: 24px;
+}
+
+.tipTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  padding-top: 4px;
+}
+
+.tipDescription {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.5;
+}

@@ -9,7 +9,7 @@ const Header = ({ onBackClick }: HeaderProps) => {
   const navigate = useNavigate();
 
   const moveHome = () => {
-    navigate('/v1');
+    navigate('/');
   };
 
   return (
@@ -22,7 +22,7 @@ const Header = ({ onBackClick }: HeaderProps) => {
         </button>
         <button className={`default-input ${styles.Button}`} onClick={moveHome} aria-label={'홈으로 가기'}>
           <div className={styles.closeIconWrapper}>
-            <i className={'icon icon-close'} />
+            <i className={'icon icon-home-padding'} />
           </div>
         </button>
       </div>

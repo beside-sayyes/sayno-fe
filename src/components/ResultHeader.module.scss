@@ -30,3 +30,37 @@
     width: 20px;
     height: 20px;
 }
+
+// V2
+.header {
+
+    &.typeV2 {
+
+        .inner {
+            justify-content: space-between;
+        }
+
+        .logoImgWrapper {
+            width: 56px;
+            height: 24px;
+
+            .logoImg {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .refreshButton {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .buttonText {
+            font-size: 14px;
+            color: #fff;
+        }
+    }
+}

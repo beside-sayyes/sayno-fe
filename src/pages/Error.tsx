@@ -13,7 +13,7 @@ const Error = () => {
     <div className={styles.error}>
       <div>
         <div className={styles.imgWrapper}>
-          <img className={styles.errorImg} src='images/img_error.png' alt='error image' />
+          <img className={styles.errorImg} src='/images/img_error.png' alt='error image' />
         </div>
         <h1 className={styles.title}>404 Not Found</h1>
         <p className={styles.description}>올바른 주소로 서비스를 이용해 주세요.</p>
